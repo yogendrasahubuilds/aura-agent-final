@@ -1,0 +1,25 @@
+{
+  "summary": "Iteration 4 retest confirms the alias normalization fix in agent.parse_request. After merging LLM + regex params, CITY_ALIASES is now applied to params.city/source/destination. All 6 targeted alias tests PASS (Bombay->Mumbai + Panjim->Goa, Calcutta->Kolkata, Vizag->Visakhapatnam, Trivandrum->Thiruvananthapuram, canonical Delhi/Mumbai/Bengaluru unchanged). Full regression also PASS: test_generator_bugfix.py 16/16 (previously 15/16 — the Panjim->Goa parametrized case now passes), test_aura_api.py 11/11. Generator still produces Kolkata->Delhi flight set (6 options, exactly one cheapest, sorted ascending, deterministic). Overall 33/33 backend tests pass = 100%.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_alias_normalization.py",
+    "/app/backend/tests/test_generator_bugfix.py",
+    "/app/backend/tests/test_aura_api.py",
+    "/app/test_reports/pytest/iteration_4_results.xml",
+    "/app/test_reports/pytest/iteration_4_regression.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Fix is clean and minimal: lines 335-339 of agent.py apply CITY_ALIASES.get(val.strip().lower(), val) for the three city keys only when value is a non-empty string — safe against None/non-string LLM outputs.",
+    "Note: test_generator_bugfix.py uses os.environ['REACT_APP_BACKEND_URL'] (no default) at module import. If REACT_APP_BACKEND_URL is not exported to shell env, collection fails with KeyError. Workaround used: `export $(grep REACT_APP_BACKEND_URL /app/frontend/.env)` before pytest. Non-blocking but a conftest.py loader would make it more robust.",
+    "Consider also normalizing the regex path's returned city values through CITY_ALIASES in a single post-merge step so both code paths are symmetric (currently fine because regex already resolves via CITY_ALIASES — this fix closes the LLM gap)."
+  ],
+  "updated_files": ["/app/backend/tests/test_alias_normalization.py"],
+  "success_rate": {"backend": "100% (33/33: 6 new + 16 generator-bugfix + 11 aura_api)", "frontend": "not retested (100% in iteration 3)"},
+  "seed_data_creation": "Regression tests created TEST_ prefixed bookings via generator-bugfix test file.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Alias normalization gap flagged in iteration 3 is now fully resolved. All 33 backend tests pass. If running test_generator_bugfix.py directly, remember to export REACT_APP_BACKEND_URL from /app/frontend/.env since it is read at import time without a default.",
+  "rca of the issue": "RCA (fix verification): parse_request first attempted LLM parse (gpt-5.4-mini via emergentintegrations), got canonical-looking tokens like 'Panaji', then merged with regex output but never passed LLM values through CITY_ALIASES. The fix adds a post-merge normalization step (agent.py lines 335-339) that lower-cases/strips the LLM-returned city string and looks it up in CITY_ALIASES, falling back to the original if not an alias. Verified: 'Panjim'/'Panaji' -> 'Goa', 'Vizag' -> 'Visakhapatnam', 'Trivandrum' -> 'Thiruvananthapuram', 'Calcutta' -> 'Kolkata', 'Bombay' -> 'Mumbai'. Canonical names (Delhi, Mumbai, Bengaluru) unaffected (identity lookup)."
+}
