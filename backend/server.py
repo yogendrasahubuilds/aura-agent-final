@@ -54,6 +54,7 @@ class BookRequest(BaseModel):
     nights: int = 1
     confirmed: bool = False
     user_request: Optional[str] = None
+    seats: Optional[List[str]] = None
 
 
 # ------------- Helpers -------------
@@ -170,6 +171,8 @@ async def book(req: BookRequest):
     pricing_qty = 1 if req.intent == "hotel" else req.quantity
     amount = calculator(unit, pricing_qty, nights)
     extra = {"nights": nights} if req.intent == "hotel" else {}
+    if req.intent == "movie" and req.seats:
+        extra["seats"] = req.seats
 
     booking = create_mock_booking(req.intent, option, req.quantity, amount, extra)
     verified = verify_booking(booking)

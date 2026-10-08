@@ -1,12 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, Sparkles } from "lucide-react";
+import { CheckCircle2, Sparkles, Download } from "lucide-react";
+import { downloadBookingPdf } from "@/lib/pdf";
 
 const fmt = (n) => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(n);
 
 export default function BookingReceipt({ receipt, onNew }) {
-  const { booking_id, intent, option, quantity, amount, verified, status, extra } = receipt;
+  const { booking_id, intent, option, quantity, amount, verified, status, extra, seats } = receipt;
   const title = intent === "movie" ? option.cinema : intent === "hotel" ? option.hotel : `${option.airline} ${option.flight_no}`;
 
   return (
@@ -42,6 +43,9 @@ export default function BookingReceipt({ receipt, onNew }) {
               <div><p className="text-xs text-slate-500">Movie</p><p className="font-semibold">{option.movie}</p></div>
               <div><p className="text-xs text-slate-500">Show time</p><p className="font-semibold">{option.time} · {option.screen}</p></div>
               <div><p className="text-xs text-slate-500">Tickets</p><p className="font-semibold">{quantity}</p></div>
+              {seats && seats.length > 0 && (
+                <div><p className="text-xs text-slate-500">Seats</p><p className="font-mono font-semibold">{seats.join(", ")}</p></div>
+              )}
             </>
           )}
           {intent === "hotel" && (
@@ -69,8 +73,11 @@ export default function BookingReceipt({ receipt, onNew }) {
         </div>
       </div>
 
-      <div className="flex gap-2 mt-5">
-        <Button onClick={onNew} className="bg-indigo-600 hover:bg-indigo-700 text-white" data-testid="new-booking-btn">
+      <div className="flex gap-2 mt-5 flex-wrap">
+        <Button onClick={() => downloadBookingPdf(receipt)} className="bg-indigo-600 hover:bg-indigo-700 text-white" data-testid="download-ticket-btn">
+          <Download className="w-4 h-4 mr-1.5" /> Download PDF Ticket
+        </Button>
+        <Button variant="outline" onClick={onNew} data-testid="new-booking-btn">
           Start a new request
         </Button>
       </div>

@@ -10,6 +10,7 @@ import { chat, searchOptions, confirmBooking, createBooking, listBookings } from
 import Timeline from "@/components/aura/Timeline";
 import ParametersCard from "@/components/aura/ParametersCard";
 import OptionList from "@/components/aura/OptionList";
+import SeatPicker from "@/components/aura/SeatPicker";
 import ConfirmationCard from "@/components/aura/ConfirmationCard";
 import BookingReceipt from "@/components/aura/BookingReceipt";
 import HistoryList from "@/components/aura/HistoryList";
@@ -38,6 +39,7 @@ export default function AuraApp() {
   const [quantity, setQuantity] = useState(1);
   const [nights, setNights] = useState(1);
   const [selected, setSelected] = useState(null);
+  const [selectedSeats, setSelectedSeats] = useState([]);
   const [preview, setPreview] = useState(null);
   const [receipt, setReceipt] = useState(null);
   const [plan, setPlan] = useState([]);
@@ -77,6 +79,7 @@ export default function AuraApp() {
     setChatResp(null);
     setOptions([]);
     setSelected(null);
+    setSelectedSeats([]);
     setPreview(null);
     setReceipt(null);
     setPlan([]);
@@ -137,6 +140,7 @@ export default function AuraApp() {
 
   const handleSelect = async (opt) => {
     setSelected(opt);
+    setSelectedSeats([]);
     updateStep("Await user selection", "done");
     updateStep("Calculate price", "in-progress");
     try {
@@ -148,7 +152,8 @@ export default function AuraApp() {
       });
       setPreview(data);
       updateStep("Calculate price", "done");
-      toast.success("Price calculated. Please confirm.");
+      if (intent === "movie") toast.message("Now pick your seats below");
+      else toast.success("Price calculated. Please confirm.");
     } catch (e) {
       toast.error("Failed to calculate price");
     }
@@ -186,6 +191,10 @@ export default function AuraApp() {
 
   const handleConfirm = async () => {
     if (!selected || !preview) return;
+    if (intent === "movie" && selectedSeats.length !== Number(quantity)) {
+      toast.error(`Please pick exactly ${quantity} seat${quantity > 1 ? "s" : ""}`);
+      return;
+    }
     updateStep("Confirm & create mock booking", "in-progress");
     try {
       const data = await createBooking({
@@ -195,8 +204,9 @@ export default function AuraApp() {
         nights: Number(nights) || 1,
         confirmed: true,
         user_request: goal,
+        seats: intent === "movie" ? selectedSeats : undefined,
       });
-      setReceipt(data);
+      setReceipt({ ...data, seats: intent === "movie" ? selectedSeats : undefined });
       const p = plan.map((s) => {
         if (s.step.toLowerCase().startsWith("confirm & create")) return { ...s, status: "done" };
         if (s.step.toLowerCase().startsWith("verify")) return { ...s, status: data.verified ? "done" : "failed" };
@@ -213,6 +223,7 @@ export default function AuraApp() {
 
   const handleCancel = () => {
     setSelected(null);
+    setSelectedSeats([]);
     setPreview(null);
     updateStep("Await user selection", "in-progress");
     toast.info("Selection cancelled");
@@ -321,6 +332,16 @@ export default function AuraApp() {
                     />
                   )}
 
+                  {!receipt && selected && preview && intent === "movie" && (
+                    <SeatPicker
+                      option={selected}
+                      requiredCount={Number(quantity) || 1}
+                      selectedSeats={selectedSeats}
+                      onSelectedSeatsChange={setSelectedSeats}
+                      onBack={handleCancel}
+                    />
+                  )}
+
                   {!receipt && selected && preview && (
                     <ConfirmationCard
                       intent={intent}
@@ -328,6 +349,7 @@ export default function AuraApp() {
                       quantity={quantity}
                       nights={nights}
                       preview={preview}
+                      seats={selectedSeats}
                       onQuantityChange={handleQuantityChange}
                       onNightsChange={handleNightsChange}
                       onConfirm={handleConfirm}

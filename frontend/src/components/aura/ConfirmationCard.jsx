@@ -8,7 +8,7 @@ const fmt = (n) => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).
 
 const QTY_LABEL = { movie: "Tickets", flight: "Passengers", hotel: "Guests" };
 
-export default function ConfirmationCard({ intent, option, quantity, nights, preview, onQuantityChange, onNightsChange, onConfirm, onCancel }) {
+export default function ConfirmationCard({ intent, option, quantity, nights, preview, seats = [], onQuantityChange, onNightsChange, onConfirm, onCancel }) {
   const amount = preview?.amount || { subtotal: 0, tax: 0, total: 0 };
   const title = intent === "movie" ? option.cinema : intent === "hotel" ? option.hotel : `${option.airline} ${option.flight_no}`;
 
@@ -18,6 +18,9 @@ export default function ConfirmationCard({ intent, option, quantity, nights, pre
       <div className="space-y-1 text-sm text-slate-700">
         <p><span className="text-slate-500">Selection:</span> <span className="font-semibold">{title}</span></p>
         {intent === "movie" && <p><span className="text-slate-500">Show:</span> {option.movie} · {option.time}</p>}
+        {intent === "movie" && seats.length > 0 && (
+          <p><span className="text-slate-500">Seats:</span> <span className="font-mono font-semibold">{seats.join(", ")}</span></p>
+        )}
         {intent === "flight" && <p><span className="text-slate-500">Route:</span> {option.source} → {option.destination} · {option.departure}</p>}
         {intent === "hotel" && <p><span className="text-slate-500">Room:</span> {option.room_type}</p>}
       </div>
