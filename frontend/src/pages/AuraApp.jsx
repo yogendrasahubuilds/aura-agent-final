@@ -251,16 +251,13 @@ export default function AuraApp() {
               <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
                 Tell AURA your plan.
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base max-w-2xl">
-                Describe a goal in plain English. AURA will understand, search mock data, and simulate the booking end-to-end — perfect for a viva demo.
-              </p>
 
               <div className="mt-5 flex flex-col sm:flex-row gap-2">
                 <Input
                   value={goal}
                   onChange={(e) => setGoal(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && submitGoal()}
-                  placeholder="e.g. Book 2 movie tickets for Mirzapur tomorrow evening in Bhilai"
+                  placeholder="Type your request in plain English..."
                   className="h-12 text-sm sm:text-base"
                   data-testid="goal-input"
                 />
