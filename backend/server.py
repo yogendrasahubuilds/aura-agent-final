@@ -15,6 +15,7 @@ from agent import parse_request, build_plan, validate_params
 from tools import movie_search, hotel_search, flight_search, calculator, get_option_by_id
 from booking import create_mock_booking, verify_booking
 from data import SUPPORTED_CITIES
+from generator import CITIES as GEN_CITIES
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / ".env")
@@ -90,7 +91,7 @@ async def root():
 @api.get("/meta")
 async def meta():
     return {
-        "supported_cities": SUPPORTED_CITIES,
+        "supported_cities": sorted(set(SUPPORTED_CITIES) | set(GEN_CITIES.keys())),
         "booking_types": ["movie", "hotel", "flight"],
         "disclaimer": "Demo data — all bookings are simulated.",
     }
