@@ -257,7 +257,7 @@ export default function AuraApp() {
                   value={goal}
                   onChange={(e) => setGoal(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && submitGoal()}
-                  placeholder="Type your request in plain English..."
+                  placeholder="e.g. Book 2 movie tickets for tomorrow evening in Bhilai"
                   className="h-12 text-sm sm:text-base"
                   data-testid="goal-input"
                 />
