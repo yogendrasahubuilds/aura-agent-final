@@ -1,0 +1,32 @@
+{
+  "summary": "Iteration 3 verified the deterministic multi-provider generator bug fix. Added /app/backend/tests/test_generator_bugfix.py (16 tests). 15/16 pass (one minor alias merge bug). Prior regression suite /app/backend/tests/test_aura_api.py: 11/11 pass. Verified: Kolkata->Delhi returns 6 flights (Vistara UK-9089 cheapest ₹4,850, 73% save, via MakeMyTrip — matches user's curl output). Chennai->Goa, hotel-Kolkata, movie-Patna all return 5-8 options with provider, is_cheapest (exactly one), save_pct_vs_max, sorted ascending by price. /api/meta returns 32 supported cities. Chat parses 'Kolkata to Delhi on 25 October' correctly (date 2026-10-25, passengers 1). Aliases Calcutta/Vizag/Trivandrum/Bombay all map correctly. Deterministic: identical ids+prices across runs. Booking GFL-/GHT-/GMV- works end-to-end — generated option resolved from in-memory _GENERATED_CACHE, booking persists in Mongo, GET /api/booking/{id} returns intact option. Frontend E2E: typed 'Find a flight from Kolkata to Delhi...' → OptionList shows 'Compared Options (6)', 'Prices range from ₹4,850 to ₹18,100 · sorted cheapest first', one 'Cheapest' badge, Save X% on 4 others, Premium on max, 'via <Provider>' on every card. Selecting first (Vistara UK-9089 generated) → review card → Confirm → AURA-FLT-47463 receipt.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/chat", "issue": "Alias 'Panjim' is not normalized to 'Goa' when parsed by LLM. The LLM returns the raw token 'Panaji' (or 'Panjim'), and agent.parse_request uses LLM params as-is without passing them through CITY_ALIASES. Regex-only parse correctly returns 'Goa'. Reproduction: POST /api/chat {\"message\":\"flight from Bombay to Panjim on 10 December\"} → params.destination = 'Panaji' (expected 'Goa'). Fix: in agent.parse_request, after merge, apply CITY_ALIASES to params.source / destination / city before returning."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_generator_bugfix.py",
+    "/app/backend/tests/test_aura_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Minor) Normalize LLM-returned city tokens through CITY_ALIASES in agent.parse_request so aliases like 'Panjim'/'Panaji' resolve to canonical 'Goa'. Already works when LLM is unavailable (regex path). Not blocking the generator feature."
+  ],
+  "critical_code_review_comments": [
+    "generator._GENERATED_CACHE is a module-level in-memory dict — fine for single-process demo but will miss cache on multi-worker/uvicorn-reload. Consider persisting to Mongo if production is ever needed.",
+    "OptionList price-range only shown when max>min; works fine. 'Cheapest' badge rendered exactly once (verified by styling + is_cheapest flag coming only on min price).",
+    "tools.movie_search sets `generated = ... or generated` on movie filter — correct fallback behaviour.",
+    "annotate_with_comparison correctly flags is_cheapest/is_premium only when max>min to avoid false 'Premium' when single result.",
+    "resolve_city handles None/empty safely; CITY_ALIAS_TO_CANONICAL built once at import.",
+    "Flight generator airport code fallback source[:3].upper() works but is weak for non-airport cities (Agra/Shimla/Rishikesh); acceptable for demo."
+  ],
+  "updated_files": ["/app/backend/tests/test_generator_bugfix.py"],
+  "success_rate": {"backend": "96% (26/27 — 15/16 new + 11/11 regression)", "frontend": "100%"},
+  "seed_data_creation": "Several TEST_ prefixed bookings created during pytest (TEST_gen_flight, TEST_gen_hotel, TEST_gen_movie) and one UI booking AURA-FLT-47463.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Generator IDs: GMV-*/GHT-*/GFL-* (uppercase hex, 16 chars). _GENERATED_CACHE in /app/backend/generator.py is in-memory module dict. Supported cities list in /api/meta now has 32 cities. Chat alias normalization gap: LLM path doesn't apply CITY_ALIASES to its output — alias 'Panjim' returns 'Panaji' instead of 'Goa'. Rest of aliases (Calcutta, Vizag, Trivandrum, Bombay) work because LLM happens to return canonical names. New test file: /app/backend/tests/test_generator_bugfix.py."
+}

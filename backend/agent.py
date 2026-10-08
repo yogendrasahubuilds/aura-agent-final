@@ -332,6 +332,11 @@ async def parse_request(text: str) -> dict:
             if v is None or v == "":
                 v = regex_params.get(k)
             merged["params"][k] = v
+        # Normalise city aliases on LLM output (e.g. Panjim -> Goa, Vizag -> Visakhapatnam)
+        for city_key in ("city", "source", "destination"):
+            val = merged["params"].get(city_key)
+            if isinstance(val, str):
+                merged["params"][city_key] = CITY_ALIASES.get(val.strip().lower(), val)
         return merged
     return regex_result
 
