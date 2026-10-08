@@ -1,0 +1,28 @@
+{
+  "summary": "First end-to-end smoke test of AURA app. All backend endpoints (/api/chat, /api/search, /api/confirm, /api/book, /api/booking/{id}, /api/bookings) work correctly for movie/hotel/flight intents. Full UI E2E flow verified: all 3 preset buttons (movie/hotel/flight) → timeline (8 steps) → options → confirmation card with correct total → booking receipt with correct AURA-MOV-/HOT-/FLT- prefixes → bookings appear in History tab after refresh. Toast 'Simulated booking confirmed' visible.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "passed": [
+    "POST /api/chat parses movie (Mirzapur/Bhilai/tickets=2/evening/ISO date), hotel (Raipur/nights=2/check_in=2026-10-15/guests=2), flight (Raipur->Delhi/2026-10-20/pax=1), all with 8-step plan, missing=[], ready_to_search=true, disclaimer present",
+    "POST /api/chat with 'Book a hotel.' returns missing=['Which city would you like to stay in?','What is your check-in date?']",
+    "POST /api/search returns results for movie Bhilai (2), hotel Raipur (3), flight Raipur->Delhi (3)",
+    "POST /api/confirm movie M001 qty=2 -> subtotal=360, tax=64.8, total=424.8 (18% GST correct)",
+    "POST /api/confirm hotel H001 qty=2 nights=2 -> subtotal=10000 (2500*2 rooms*2 nights), tax=1800, total=11800",
+    "POST /api/book without confirmed=true -> HTTP 400 'User confirmation required'",
+    "POST /api/book with confirmed=true creates booking AURA-MOV-36865, status=confirmed, verified=true, simulated=true",
+    "POST /api/book with invalid option_id BAD999 -> HTTP 404 'Option not found'",
+    "GET /api/bookings lists persisted bookings; GET /api/booking/{id} returns booking details",
+    "Frontend home page loads with AURA header, goal-input, submit-goal-btn, 3 preset buttons",
+    "Movie preset flow: timeline shows 8 steps, parameters-card visible, option-M001 selectable, confirmation-card shows total ₹424.8, booking receipt shows AURA-MOV-79988",
+    "Hotel preset flow end-to-end: nights-input visible in confirmation, booking id AURA-HOT-21981",
+    "Flight preset flow end-to-end: booking id AURA-FLT-51574",
+    "past-bookings-tab shows HistoryList; refresh-history-btn works; MOV/HOT/FLT bookings all visible",
+    "Toast 'Simulated booking confirmed!' displayed after booking"
+  ],
+  "failed": [],
+  "action_items": [
+    "Note: Hotel confirm subtotal with qty=2 nights=2 returned 10000 (2500*2*2) rather than the 5000 mentioned in the review request. This appears to be the logically correct behavior (quantity=rooms × nights × price_per_night) but the review request wording suggested 5000. Please verify intended pricing semantics for hotel quantity."
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true
+}

@@ -142,7 +142,9 @@ async def confirm(req: ConfirmRequest):
         raise HTTPException(status_code=404, detail="Option not found")
     unit = _unit_price(req.intent, option)
     nights = req.nights if req.intent == "hotel" else 1
-    amount = calculator(unit, req.quantity, nights)
+    # For hotels, price is per-room per-night (guests don't multiply price).
+    pricing_qty = 1 if req.intent == "hotel" else req.quantity
+    amount = calculator(unit, pricing_qty, nights)
     return {
         "intent": req.intent,
         "option": option,
@@ -165,7 +167,8 @@ async def book(req: BookRequest):
 
     unit = _unit_price(req.intent, option)
     nights = req.nights if req.intent == "hotel" else 1
-    amount = calculator(unit, req.quantity, nights)
+    pricing_qty = 1 if req.intent == "hotel" else req.quantity
+    amount = calculator(unit, pricing_qty, nights)
     extra = {"nights": nights} if req.intent == "hotel" else {}
 
     booking = create_mock_booking(req.intent, option, req.quantity, amount, extra)
