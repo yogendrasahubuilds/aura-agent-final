@@ -1,0 +1,19 @@
+{
+  "summary": "Iteration 2 full backend + frontend testing of AURA with new Seat Picker (movie) and PDF Download. All 11 pytest cases pass (chat/search/confirm/book/seats persistence/prefixes/validation). Frontend E2E passes: seat picker renders only for movie above confirmation card, booked seats cannot be selected, selected-seats-text updates correctly, confirm is blocked when seat count != quantity (toast), confirming with 2 seats creates AURA-MOV-* booking with 'Seats' label visible in receipt, hotel/flight flows do NOT render seat picker and still produce AURA-HOT-/AURA-FLT- bookings. PDF download triggers a 'AURA-MOV-XXXXX.pdf' browser download using jsPDF (no network error).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_aura_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "pdf.js saves as `${booking_id}.pdf` which happens to start with 'AURA-' as the booking_id does — matches the request. OK.",
+    "SeatPicker.hashedBooked uses deterministic hash per option.id — good for repeatability; cosmetic: Math.abs on signed 32-bit overflow can collide, but acceptable for demo.",
+    "AuraApp.handleConfirm correctly blocks booking when selectedSeats.length !== quantity with toast; seats passed only when intent==='movie'. Good.",
+    "Backend BookRequest.seats is Optional[List[str]] stored into booking.extra.seats only for movie — verified via GET /api/booking/{id}."
+  ],
+  "updated_files": ["/app/backend/tests/test_aura_api.py"],
+  "success_rate": {"backend": "100% (11/11)", "frontend": "100%"},
+  "seed_data_creation": "Created several TEST_ bookings via /api/book during pytest run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend regression suite lives at /app/backend/tests/test_aura_api.py (pytest). Seat picker testids: seat-picker, seat-{A1..H10}, selected-seats-text, seat-back-btn. Receipt testids: booking-receipt, booking-id, download-ticket-btn, new-booking-btn. PDF filename equals `${booking_id}.pdf`."
+}
