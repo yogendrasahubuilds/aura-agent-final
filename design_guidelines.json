@@ -1,0 +1,105 @@
+{
+  "project_title": "AURA - Autonomous Universal Resource Agent",
+  "theme_strategy": "Vivid modern AI agent dashboard with friendly student-crafted aesthetic, smooth execution timeline, high-contrast parameter chips, and interactive mock booking cards.",
+  "colors": {
+    "primary": "#4F46E5",
+    "primary_hover": "#4338CA",
+    "secondary": "#06B6D4",
+    "accent_movie": "#E11D48",
+    "accent_hotel": "#10B981",
+    "accent_flight": "#3B82F6",
+    "background_light": "#F8FAFC",
+    "background_dark": "#0F172A",
+    "card_light": "#FFFFFF",
+    "card_dark": "#1E293B",
+    "text_dark": "#0F172A",
+    "text_light": "#F8FAFC",
+    "text_muted": "#64748B",
+    "border_light": "#E2E8F0",
+    "border_dark": "#334155"
+  },
+  "typography": {
+    "font_family_heading": "Outfit, Plus Jakarta Sans, sans-serif",
+    "font_family_body": "Inter, system-ui, sans-serif",
+    "font_family_code": "JetBrains Mono, monospace",
+    "scale": {
+      "h1": "text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight",
+      "h2": "text-xl sm:text-2xl font-bold tracking-tight",
+      "h3": "text-lg sm:text-xl font-semibold",
+      "body": "text-sm sm:text-base leading-relaxed",
+      "small": "text-xs sm:text-sm font-medium",
+      "badge": "text-xs font-semibold tracking-wide uppercase"
+    }
+  },
+  "responsive": {
+    "breakpoint": "mobile-first",
+    "layout": "Stack single column on mobile (<768px). On desktop (>=768px), split into side-by-side or multi-column grid: left column for Chat Input & Execution Timeline, right column for Extracted Parameters, Options Selection, and Active Ticket/Booking confirmation.",
+    "typography": "Mobile-first scaling using responsive Tailwind classes (e.g. text-xl sm:text-2xl md:text-3xl). Inputs must have min height 44px to avoid auto-zoom.",
+    "overflow_guard": "Ensure max-w-full and overflow-x-hidden on root containers to eliminate horizontal scrollbars on smaller viewports.",
+    "tap_targets": "All buttons, tab chips, slot buttons, and interactive cards must have min 44px height/width for easy tapping."
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border border-slate-200/60 dark:border-slate-800/60 shadow-lg shadow-indigo-500/5",
+    "card_hover": "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-indigo-400/50",
+    "timeline_glow": "shadow-[0_0_12px_rgba(79,70,229,0.3)]",
+    "ticket_notch": "relative rounded-xl border border-dashed border-indigo-300 dark:border-indigo-800 p-4 bg-indigo-50/50 dark:bg-slate-800/50"
+  },
+  "image_urls": {
+    "movies": [
+      {
+        "url": "https://images.unsplash.com/photo-1572188863110-46d457c9234d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwyfHxjaW5lbWElMjBwb3N0ZXIlMjBwb3Bjb3JufGVufDB8fHx8MTc5MTQ2MTUxNnww&ixlib=rb-4.1.0&q=85",
+        "description": "Cinema movie posters gallery display",
+        "category": "movie_banner"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1785462099343-2b5baef20a49?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHw0fHxjaW5lbWElMjBwb3N0ZXIlMjBwb3Bjb3JufGVufDB8fHx8MTc5MTQ2MTUxNnww&ixlib=rb-4.1.0&q=85",
+        "description": "Cinema popcorn and concession theater setup",
+        "category": "movie_snack"
+      }
+    ],
+    "hotels": [
+      {
+        "url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBob3RlbCUyMHJvb218ZW58MHx8fHwxNzkxNDYxNTE2fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Luxury hotel room with garden view",
+        "category": "hotel_room"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMHJvb218ZW58MHx8fHwxNzkxNDYxNTE2fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Plush hotel bed linen with modern interior",
+        "category": "hotel_bed"
+      }
+    ],
+    "flights": [
+      {
+        "url": "https://images.unsplash.com/photo-1559268950-2d7ceb2efa3a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwxfHxhaXJwbGFuZSUyMGZsaWdodCUyMHNreXxlbnwwfHx8fDE3OTE0NjE1MTZ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Commercial airliner flying high in clear blue sky",
+        "category": "flight_sky"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1499063078284-f78f7d89616a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHw0fHxhaXJwbGFuZSUyMGZsaWdodCUyMHNreXxlbnwwfHx8fDE3OTE0NjE1MTZ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Airplane soaring through soft evening clouds",
+        "category": "flight_sunset"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Use standard JavaScript (.js / .jsx) files in src/ (do NOT use .tsx files).",
+    "Include data-testid attributes on all key interactive elements (e.g. data-testid='goal-input', data-testid='submit-goal-btn', data-testid='prompt-preset-movie', data-testid='confirm-booking-btn', data-testid='past-bookings-tab').",
+    "Show a full agent workflow execution timeline with 7 distinct steps: 1. Request understood -> 2. Parameters extracted -> 3. Searching inventory -> 4. Options presented -> 5. User choice registered -> 6. Price calculated & verified -> 7. Mock booking confirmed.",
+    "Provide realistic mock data for Indian cities including Bhilai, Raipur, Delhi, Mumbai, Bengaluru, Hyderabad, and Pune with INR prices (₹).",
+    "Support 3 distinct booking types: Movies (Mirzapur, Stree 2, Pushpa 2, Kalki), Hotels (Sayaji Raipur, Hotel Grand Bhilai, Taj Palace Delhi, JW Marriott Mumbai), and Flights (IndiGo 6E-402, Air India AI-801, Vistara UK-923).",
+    "Provide 3 quick prompt preset chips for fast testing during viva demo ('Book 2 movie tickets for Mirzapur tomorrow evening in Bhilai', 'Book a luxury hotel in Raipur for 2 nights starting Friday', 'Find flights from Raipur to Delhi for next Monday morning').",
+    "Display extracted parameter cards prominently showing intent type badge, location, date, ticket/guest count, class/seat preference, and price estimation.",
+    "Include interactive options selection with real-time total price calculation before final confirmation step.",
+    "Include a simulated booking confirmation ticket complete with unique booking ID (e.g. AURA-MOV-8921), QR code placeholder, mock breakdown, and 'SIMULATED BOOKING CONFIRMED' badge.",
+    "Persist past simulated bookings in localStorage so users can view booking history and clear history if needed.",
+    "Add a smooth step-by-step auto simulation trigger button ('Run Full Agent Auto-Demo') for effortless live viva presentation."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Maintain high contrast and accessibility for light and dark themes.",
+    "Do not add universal transition: all CSS rules. Specify transition on individual elements.",
+    "Never center align the root app container. Use natural left-aligned reading flows.",
+    "Use Lucide icons and colorful badges for visual clarity.",
+    "Ensure sonner is used for dynamic alerts and toasts."
+  ]
+}
