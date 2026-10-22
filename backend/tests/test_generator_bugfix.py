@@ -150,7 +150,7 @@ def test_book_generated_hotel(session):
         "confirmed": True, "user_request": "TEST_gen_hotel",
     })
     assert b.status_code == 200
-    assert b.json()["booking_id"].startswith("AURA-HOT-")
+    assert b.json()["booking_id"].startswith("AURA-HTL-")
 
 
 def test_book_generated_movie(session):

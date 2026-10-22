@@ -1,0 +1,628 @@
+{
+  "_metadata": {
+    "simulated": true,
+    "description": "Destination facts use real-world geography; visit durations, seasonal guidance, transfers, hotel rates, budgets, distances, prices, and times are approximate simulated estimates in INR. Not for real booking or safety decisions."
+  },
+  "destinations": [
+    {
+      "id": "DST-GOA", "name": "Goa", "state": "Goa", "themes": ["beach", "culture", "food", "nature"],
+      "attractions": [
+        {"name": "Basilica of Bom Jesus", "description": "Explore the historic Old Goa church and its Baroque architecture.", "durationHours": 1.5},
+        {"name": "Fontainhas", "description": "Walk through Panaji's colorful Portuguese-era Latin Quarter.", "durationHours": 2},
+        {"name": "Fort Aguada", "description": "See the coastal fort and broad Arabian Sea views.", "durationHours": 1.5},
+        {"name": "Dudhsagar Falls", "description": "Visit a dramatic waterfall in the Western Ghats.", "durationHours": 5},
+        {"name": "Palolem Beach", "description": "Relax on a sheltered crescent beach in South Goa.", "durationHours": 3},
+        {"name": "Anjuna Flea Market", "description": "Browse local crafts, clothing, and food stalls.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 5},
+      "season": {"bestMonths": [11, 12, 1, 2, 3], "bestLabel": "November-March", "avoidMonths": [6, 7, 8, 9], "avoidReason": "Heavy monsoon rain can disrupt beach and outdoor plans."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 6500, "luxury": 18000},
+      "gateway": {"airportCity": "Goa", "railCity": "Goa", "note": "Goa is the listed gateway city; Goa has Dabolim and Manohar International airports."},
+      "transfers": [
+        {"gatewayCity": "Goa", "gatewayType": "airport", "mode": "taxi", "distanceKm": 30, "durationHours": 0.8, "priceINR": [900, 1800], "bookable": false},
+        {"gatewayCity": "Goa", "gatewayType": "rail", "mode": "taxi", "distanceKm": 25, "durationHours": 0.7, "priceINR": [700, 1500], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.45, "peakMonths": [12, 1], "peakMultiplier": 1.35
+    },
+    {
+      "id": "DST-JAI", "name": "Jaipur", "state": "Rajasthan", "themes": ["culture", "food", "adventure"],
+      "attractions": [
+        {"name": "Amber Fort", "description": "Tour the hilltop fort's courtyards, halls, and ramparts.", "durationHours": 3},
+        {"name": "Hawa Mahal", "description": "View Jaipur's celebrated pink sandstone palace facade.", "durationHours": 1},
+        {"name": "City Palace", "description": "Visit royal courtyards, galleries, and museum collections.", "durationHours": 2},
+        {"name": "Jantar Mantar", "description": "See the historic astronomical instruments of the observatory.", "durationHours": 1.5},
+        {"name": "Nahargarh Fort", "description": "Take in elevated views over Jaipur from the Aravalli hills.", "durationHours": 2},
+        {"name": "Johari Bazaar", "description": "Browse traditional jewelry, textiles, and local snacks.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "Daytime summer heat can make fort visits strenuous."},
+      "dailyBudgetINR": {"budget": 1800, "comfort": 5200, "luxury": 16000},
+      "gateway": {"airportCity": "Jaipur", "railCity": "Jaipur", "note": "Jaipur is the listed gateway city."},
+      "transfers": [
+        {"gatewayCity": "Jaipur", "gatewayType": "airport", "mode": "taxi", "distanceKm": 12, "durationHours": 0.4, "priceINR": [350, 900], "bookable": false},
+        {"gatewayCity": "Jaipur", "gatewayType": "rail", "mode": "taxi", "distanceKm": 5, "durationHours": 0.25, "priceINR": [180, 500], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.1, "peakMonths": [10, 11, 12, 1], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-UDR", "name": "Udaipur", "state": "Rajasthan", "themes": ["culture", "nature", "food"],
+      "attractions": [
+        {"name": "City Palace", "description": "Explore the lakeside royal complex and its museum rooms.", "durationHours": 3},
+        {"name": "Lake Pichola", "description": "Enjoy the waterfront and views of the palace and ghats.", "durationHours": 2},
+        {"name": "Jag Mandir", "description": "Visit the island palace set within Lake Pichola.", "durationHours": 1.5},
+        {"name": "Saheliyon-ki-Bari", "description": "Stroll through the historic garden of fountains and pavilions.", "durationHours": 1.5},
+        {"name": "Bagore Ki Haveli", "description": "See the restored haveli and its cultural displays.", "durationHours": 1.5},
+        {"name": "Sajjangarh Monsoon Palace", "description": "Watch sunset over the lakes from the hilltop palace.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "Very hot afternoons limit comfortable sightseeing."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 7000, "luxury": 22000},
+      "gateway": {"airportCity": "Udaipur", "railCity": "Udaipur", "note": "Udaipur is the listed gateway city."},
+      "transfers": [
+        {"gatewayCity": "Udaipur", "gatewayType": "airport", "mode": "taxi", "distanceKm": 22, "durationHours": 0.6, "priceINR": [600, 1400], "bookable": false},
+        {"gatewayCity": "Udaipur", "gatewayType": "rail", "mode": "taxi", "distanceKm": 3, "durationHours": 0.2, "priceINR": [150, 450], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.4, "peakMonths": [10, 11, 12, 1], "peakMultiplier": 1.25
+    },
+    {
+      "id": "DST-JDH", "name": "Jodhpur", "state": "Rajasthan", "themes": ["culture", "food", "adventure"],
+      "attractions": [
+        {"name": "Mehrangarh Fort", "description": "Tour the imposing hilltop fort and its historic galleries.", "durationHours": 3},
+        {"name": "Jaswant Thada", "description": "Visit the marble memorial beside the fort.", "durationHours": 1},
+        {"name": "Umaid Bhawan Palace Museum", "description": "See exhibits in part of the grand palace complex.", "durationHours": 1.5},
+        {"name": "Clock Tower and Sardar Market", "description": "Explore the busy market lanes of the old city.", "durationHours": 2},
+        {"name": "Toorji Ka Jhalra", "description": "See a restored stepwell in the historic center.", "durationHours": 0.75},
+        {"name": "Mandore Gardens", "description": "Walk among historic cenotaphs and landscaped gardens.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "Extreme summer heat makes exposed sightseeing difficult."},
+      "dailyBudgetINR": {"budget": 1700, "comfort": 4800, "luxury": 15000},
+      "gateway": {"airportCity": "Udaipur", "railCity": "Udaipur", "note": "Udaipur is the closest listed city hub; Jodhpur has a local airport and railhead with a simulated onward connection."},
+      "transfers": [
+        {"gatewayCity": "Udaipur", "gatewayType": "airport", "mode": "flight", "distanceKm": 196, "durationHours": 0.8, "priceINR": [2200, 6500], "bookable": false},
+        {"gatewayCity": "Udaipur", "gatewayType": "rail", "mode": "train", "distanceKm": 250, "durationHours": 4, "priceINR": [350, 2400], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.05, "peakMonths": [10, 11, 12, 1], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-JSM", "name": "Jaisalmer", "state": "Rajasthan", "themes": ["culture", "adventure", "nature"],
+      "attractions": [
+        {"name": "Jaisalmer Fort", "description": "Walk the living fort's lanes, temples, and viewpoints.", "durationHours": 3},
+        {"name": "Patwon Ki Haveli", "description": "Admire ornate sandstone facades and carved interiors.", "durationHours": 1.5},
+        {"name": "Gadisar Lake", "description": "Visit the historic lake and its small shrines.", "durationHours": 1},
+        {"name": "Sam Sand Dunes", "description": "Experience the desert landscape near sunset.", "durationHours": 4},
+        {"name": "Kuldhara Village", "description": "Explore the atmospheric remains of an abandoned settlement.", "durationHours": 1.5},
+        {"name": "Bada Bagh", "description": "See the royal cenotaphs set against the desert.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2], "bestLabel": "October-February", "avoidMonths": [4, 5, 6], "avoidReason": "Desert daytime temperatures can become extreme."},
+      "dailyBudgetINR": {"budget": 2000, "comfort": 6000, "luxury": 19000},
+      "gateway": {"airportCity": "Udaipur", "railCity": "Udaipur", "note": "Udaipur is the closest listed city hub; Jaisalmer has a local airport and railhead with a simulated onward connection."},
+      "transfers": [
+        {"gatewayCity": "Udaipur", "gatewayType": "airport", "mode": "flight", "distanceKm": 390, "durationHours": 1.2, "priceINR": [2800, 7500], "bookable": false},
+        {"gatewayCity": "Udaipur", "gatewayType": "rail", "mode": "train", "distanceKm": 520, "durationHours": 8, "priceINR": [450, 2800], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.2, "peakMonths": [11, 12, 1], "peakMultiplier": 1.35
+    },
+    {
+      "id": "DST-PUS", "name": "Pushkar", "state": "Rajasthan", "themes": ["spiritual", "culture", "food"],
+      "attractions": [
+        {"name": "Brahma Temple", "description": "Visit one of the best-known temples dedicated to Brahma.", "durationHours": 1},
+        {"name": "Pushkar Lake Ghats", "description": "Walk the sacred lakefront and its bathing ghats.", "durationHours": 1.5},
+        {"name": "Savitri Mata Temple", "description": "Reach the hilltop shrine for views over Pushkar.", "durationHours": 2},
+        {"name": "Rangji Temple", "description": "See the temple's distinctive architectural styles.", "durationHours": 1},
+        {"name": "Varaha Temple", "description": "Explore a historic temple in the old town.", "durationHours": 0.75},
+        {"name": "Pushkar Bazaar", "description": "Browse handicrafts, textiles, and local street food.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 1, "ideal": 2},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "Hot afternoons are less comfortable for walking."},
+      "dailyBudgetINR": {"budget": 1500, "comfort": 4000, "luxury": 11000},
+      "gateway": {"airportCity": "Jaipur", "railCity": "Jaipur", "note": "Ajmer is the nearest railhead but not in the transport city list; use listed Jaipur with a longer transfer."},
+      "transfers": [
+        {"gatewayCity": "Jaipur", "gatewayType": "airport", "mode": "taxi", "distanceKm": 150, "durationHours": 2.8, "priceINR": [2500, 5000], "bookable": false},
+        {"gatewayCity": "Jaipur", "gatewayType": "rail", "mode": "train", "distanceKm": 135, "durationHours": 2.5, "priceINR": [150, 1200], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 0.9, "peakMonths": [10, 11], "peakMultiplier": 1.3
+    },
+    {
+      "id": "DST-AGR", "name": "Agra", "state": "Uttar Pradesh", "themes": ["culture", "food"],
+      "attractions": [
+        {"name": "Taj Mahal", "description": "Visit the marble mausoleum and its formal gardens.", "durationHours": 3},
+        {"name": "Agra Fort", "description": "Explore the Mughal fort's palaces and courtyards.", "durationHours": 2.5},
+        {"name": "Mehtab Bagh", "description": "View the Taj Mahal across the Yamuna from the garden.", "durationHours": 1.5},
+        {"name": "Itimad-ud-Daulah", "description": "See the detailed marble tomb often called the Baby Taj.", "durationHours": 1.5},
+        {"name": "Fatehpur Sikri", "description": "Tour the historic Mughal city and monumental gateways.", "durationHours": 4},
+        {"name": "Sadar Bazaar", "description": "Browse local crafts and sample Agra's sweets.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 1, "ideal": 2},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "High summer heat can limit outdoor monument visits."},
+      "dailyBudgetINR": {"budget": 1600, "comfort": 4500, "luxury": 14000},
+      "gateway": {"airportCity": "Agra", "railCity": "Agra", "note": "Agra is the listed gateway city; its airport has limited commercial connectivity."},
+      "transfers": [
+        {"gatewayCity": "Agra", "gatewayType": "airport", "mode": "taxi", "distanceKm": 12, "durationHours": 0.4, "priceINR": [300, 800], "bookable": false},
+        {"gatewayCity": "Agra", "gatewayType": "rail", "mode": "taxi", "distanceKm": 6, "durationHours": 0.3, "priceINR": [180, 500], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 0.95, "peakMonths": [10, 11, 12, 1], "peakMultiplier": 1.25
+    },
+    {
+      "id": "DST-VNS", "name": "Varanasi", "state": "Uttar Pradesh", "themes": ["spiritual", "culture", "food"],
+      "attractions": [
+        {"name": "Dashashwamedh Ghat", "description": "See the riverfront ghat and its evening ceremony setting.", "durationHours": 1.5},
+        {"name": "Kashi Vishwanath Temple", "description": "Visit the major Shiva temple complex in the old city.", "durationHours": 2},
+        {"name": "Assi Ghat", "description": "Walk the southern riverfront and nearby lanes.", "durationHours": 1.5},
+        {"name": "Sarnath", "description": "Explore the Buddhist site, stupas, and museum area.", "durationHours": 3},
+        {"name": "Manikarnika Ghat", "description": "Observe the historic riverside ghat respectfully from public areas.", "durationHours": 1},
+        {"name": "Banaras Hindu University", "description": "Visit the expansive university campus and Bharat Kala Bhavan.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "Pre-monsoon heat and humidity can be intense."},
+      "dailyBudgetINR": {"budget": 1600, "comfort": 4800, "luxury": 15000},
+      "gateway": {"airportCity": "Varanasi", "railCity": "Varanasi", "note": "Varanasi is the listed gateway city."},
+      "transfers": [
+        {"gatewayCity": "Varanasi", "gatewayType": "airport", "mode": "taxi", "distanceKm": 25, "durationHours": 0.8, "priceINR": [500, 1300], "bookable": false},
+        {"gatewayCity": "Varanasi", "gatewayType": "rail", "mode": "taxi", "distanceKm": 4, "durationHours": 0.25, "priceINR": [150, 450], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 0.95, "peakMonths": [10, 11, 12, 1], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-RIS", "name": "Rishikesh", "state": "Uttarakhand", "themes": ["spiritual", "adventure", "nature"],
+      "attractions": [
+        {"name": "Lakshman Jhula area", "description": "Explore the riverfront lanes and bridge viewpoints.", "durationHours": 2},
+        {"name": "Triveni Ghat", "description": "Visit the central bathing ghat on the Ganges.", "durationHours": 1.5},
+        {"name": "Neer Garh Waterfall", "description": "Hike to a forest waterfall above the town.", "durationHours": 3},
+        {"name": "Beatles Ashram", "description": "Walk among the forest retreat's meditation huts and murals.", "durationHours": 2},
+        {"name": "Shivpuri rafting stretch", "description": "Experience a seasonal white-water rafting route with licensed operators.", "durationHours": 3},
+        {"name": "Parmarth Niketan", "description": "Visit the riverside ashram and its gardens.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 4},
+      "season": {"bestMonths": [2, 3, 4, 9, 10, 11], "bestLabel": "February-April and September-November", "avoidMonths": [7, 8], "avoidReason": "Monsoon rain can raise river levels and increase landslide risk."},
+      "dailyBudgetINR": {"budget": 1800, "comfort": 5200, "luxury": 16000},
+      "gateway": {"airportCity": "Dehradun", "railCity": "Dehradun", "note": "Dehradun is the nearest listed city; Rishikesh has a local rail station but is not in the transport city list."},
+      "transfers": [
+        {"gatewayCity": "Dehradun", "gatewayType": "airport", "mode": "taxi", "distanceKm": 22, "durationHours": 0.8, "priceINR": [700, 1800], "bookable": false},
+        {"gatewayCity": "Dehradun", "gatewayType": "rail", "mode": "taxi", "distanceKm": 43, "durationHours": 1.5, "priceINR": [1000, 2500], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 0.9, "peakMonths": [3, 4, 10, 11], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-HAR", "name": "Haridwar", "state": "Uttarakhand", "themes": ["spiritual", "culture", "nature"],
+      "attractions": [
+        {"name": "Har Ki Pauri", "description": "Visit the prominent Ganges ghat and surrounding market lanes.", "durationHours": 2},
+        {"name": "Mansa Devi Temple", "description": "Reach the hilltop temple by ropeway or walking route.", "durationHours": 2},
+        {"name": "Chandi Devi Temple", "description": "Visit the hill shrine overlooking the river plain.", "durationHours": 2},
+        {"name": "Maya Devi Temple", "description": "See one of Haridwar's historic temples.", "durationHours": 1},
+        {"name": "Shantikunj", "description": "Explore the spiritual and cultural campus.", "durationHours": 1.5},
+        {"name": "Rajaji National Park", "description": "Take a permitted nature or wildlife excursion in season.", "durationHours": 4}
+      ],
+      "suggestedDurationDays": {"min": 1, "ideal": 2},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [7, 8], "avoidReason": "Monsoon rain may affect riverfront access and road travel."},
+      "dailyBudgetINR": {"budget": 1300, "comfort": 3600, "luxury": 10000},
+      "gateway": {"airportCity": "Dehradun", "railCity": "Dehradun", "note": "Dehradun is the nearest listed airport city; Haridwar itself has a railhead but is not in the list."},
+      "transfers": [
+        {"gatewayCity": "Dehradun", "gatewayType": "airport", "mode": "taxi", "distanceKm": 40, "durationHours": 1.5, "priceINR": [1200, 2800], "bookable": false},
+        {"gatewayCity": "Dehradun", "gatewayType": "rail", "mode": "taxi", "distanceKm": 55, "durationHours": 1.8, "priceINR": [1400, 3200], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 0.8, "peakMonths": [10, 11, 3], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-MUS", "name": "Mussoorie", "state": "Uttarakhand", "themes": ["hills", "nature", "adventure"],
+      "attractions": [
+        {"name": "Gun Hill", "description": "Take in Himalayan foothill views from the popular viewpoint.", "durationHours": 1.5},
+        {"name": "Kempty Falls", "description": "Visit the well-known waterfall and surrounding valley.", "durationHours": 2},
+        {"name": "Camel's Back Road", "description": "Walk the scenic ridge road above the town.", "durationHours": 2},
+        {"name": "Lal Tibba", "description": "See a high viewpoint in the Landour area.", "durationHours": 1.5},
+        {"name": "Company Garden", "description": "Relax in the landscaped garden and small boating area.", "durationHours": 1.5},
+        {"name": "Landour Bazaar", "description": "Explore the quieter hill-town lanes and cafes.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [3, 4, 5, 9, 10, 11], "bestLabel": "March-June and September-November", "avoidMonths": [7, 8], "avoidReason": "Monsoon showers can trigger landslides and disrupt hill roads."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 6500, "luxury": 19000},
+      "gateway": {"airportCity": "Dehradun", "railCity": "Dehradun", "note": "Dehradun is the nearest listed hub; continue by road to Mussoorie."},
+      "transfers": [
+        {"gatewayCity": "Dehradun", "gatewayType": "airport", "mode": "taxi", "distanceKm": 60, "durationHours": 2, "priceINR": [1800, 4000], "bookable": false},
+        {"gatewayCity": "Dehradun", "gatewayType": "rail", "mode": "taxi", "distanceKm": 35, "durationHours": 1.5, "priceINR": [1200, 3000], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.2, "peakMonths": [5, 6], "peakMultiplier": 1.35
+    },
+    {
+      "id": "DST-NAI", "name": "Nainital", "state": "Uttarakhand", "themes": ["hills", "nature", "adventure"],
+      "attractions": [
+        {"name": "Naini Lake", "description": "Enjoy the lakefront and boating area in the hill town.", "durationHours": 2},
+        {"name": "Naina Devi Temple", "description": "Visit the temple beside the north shore of the lake.", "durationHours": 1},
+        {"name": "Snow View Point", "description": "See broad mountain views from the upper ridge.", "durationHours": 1.5},
+        {"name": "Tiffin Top", "description": "Hike or ride to a popular forested viewpoint.", "durationHours": 3},
+        {"name": "Eco Cave Gardens", "description": "Explore a small network of natural rock caves.", "durationHours": 1.5},
+        {"name": "Nainital Zoo", "description": "Visit the hillside wildlife park subject to opening schedules.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [3, 4, 5, 9, 10, 11], "bestLabel": "March-June and September-November", "avoidMonths": [7, 8], "avoidReason": "Monsoon rainfall can cause landslides and road delays."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 6500, "luxury": 19000},
+      "gateway": {"airportCity": "Delhi", "railCity": "Delhi", "note": "Kathgodam is the nearest railhead but not in the list; Delhi is a listed hub with a long onward transfer."},
+      "transfers": [
+        {"gatewayCity": "Delhi", "gatewayType": "airport", "mode": "taxi", "distanceKm": 300, "durationHours": 7, "priceINR": [6500, 12000], "bookable": false},
+        {"gatewayCity": "Delhi", "gatewayType": "rail", "mode": "train", "distanceKm": 280, "durationHours": 5.5, "priceINR": [350, 2200], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.2, "peakMonths": [5, 6], "peakMultiplier": 1.35
+    },
+    {
+      "id": "DST-MAN", "name": "Manali", "state": "Himachal Pradesh", "themes": ["hills", "adventure", "nature"],
+      "attractions": [
+        {"name": "Hadimba Devi Temple", "description": "Visit the cedar-forest shrine and its carved wooden architecture.", "durationHours": 1.5},
+        {"name": "Old Manali", "description": "Explore riverside lanes, cafes, and local craft shops.", "durationHours": 2},
+        {"name": "Solang Valley", "description": "See a mountain valley used for seasonal outdoor activities.", "durationHours": 4},
+        {"name": "Atal Tunnel and Sissu", "description": "Take a road excursion toward Lahaul when routes are open.", "durationHours": 6},
+        {"name": "Vashisht Hot Springs", "description": "Visit the village temples and public hot spring area.", "durationHours": 2},
+        {"name": "Naggar Castle", "description": "Tour the historic castle and Kullu valley viewpoint.", "durationHours": 3}
+      ],
+      "suggestedDurationDays": {"min": 3, "ideal": 5},
+      "season": {"bestMonths": [3, 4, 5, 6, 9, 10], "bestLabel": "March-June and September-October", "avoidMonths": [7, 8, 1, 2], "avoidReason": "Monsoon landslides and winter snow can close roads and high passes."},
+      "dailyBudgetINR": {"budget": 2400, "comfort": 7200, "luxury": 22000},
+      "gateway": {"airportCity": "Chandigarh", "railCity": "Chandigarh", "note": "Bhuntar airport and Joginder Nagar railhead are closer but not listed; Chandigarh is the nearest major listed gateway with a long road transfer."},
+      "transfers": [
+        {"gatewayCity": "Chandigarh", "gatewayType": "airport", "mode": "taxi", "distanceKm": 310, "durationHours": 8, "priceINR": [7000, 14000], "bookable": false},
+        {"gatewayCity": "Chandigarh", "gatewayType": "rail", "mode": "bus", "distanceKm": 300, "durationHours": 8.5, "priceINR": [700, 2500], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.25, "peakMonths": [5, 6], "peakMultiplier": 1.4
+    },
+    {
+      "id": "DST-SHI", "name": "Shimla", "state": "Himachal Pradesh", "themes": ["hills", "culture", "nature"],
+      "attractions": [
+        {"name": "The Ridge", "description": "Walk Shimla's central open promenade and mountain viewpoint.", "durationHours": 1.5},
+        {"name": "Mall Road", "description": "Explore the pedestrian shopping and heritage district.", "durationHours": 2},
+        {"name": "Jakhoo Temple", "description": "Visit the hilltop Hanuman temple above the town.", "durationHours": 2},
+        {"name": "Viceregal Lodge", "description": "Tour the historic estate and its gardens.", "durationHours": 2},
+        {"name": "Kalka-Shimla Railway", "description": "Experience a scenic section of the heritage narrow-gauge route.", "durationHours": 4},
+        {"name": "Kufri", "description": "Take a short mountain excursion to the nearby hill area.", "durationHours": 3}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [3, 4, 5, 9, 10, 11], "bestLabel": "March-June and September-November", "avoidMonths": [7, 8], "avoidReason": "Monsoon rain can cause landslides and road disruption."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 6500, "luxury": 19000},
+      "gateway": {"airportCity": "Chandigarh", "railCity": "Chandigarh", "note": "Shimla has a small airport and heritage rail service; Chandigarh is the nearest listed major hub."},
+      "transfers": [
+        {"gatewayCity": "Chandigarh", "gatewayType": "airport", "mode": "taxi", "distanceKm": 115, "durationHours": 3.5, "priceINR": [3000, 6500], "bookable": false},
+        {"gatewayCity": "Chandigarh", "gatewayType": "rail", "mode": "train", "distanceKm": 115, "durationHours": 5.5, "priceINR": [250, 1800], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.25, "peakMonths": [5, 6], "peakMultiplier": 1.4
+    },
+    {
+      "id": "DST-ATQ", "name": "Amritsar", "state": "Punjab", "themes": ["spiritual", "culture", "food"],
+      "attractions": [
+        {"name": "Golden Temple", "description": "Visit the Sikh shrine and its community kitchen respectfully.", "durationHours": 3},
+        {"name": "Jallianwala Bagh", "description": "Learn about the 1919 events at this historic memorial.", "durationHours": 1.5},
+        {"name": "Wagah-Attari Border", "description": "Watch the ceremonial border event subject to schedules.", "durationHours": 4},
+        {"name": "Partition Museum", "description": "Explore oral histories and exhibits about Partition.", "durationHours": 2},
+        {"name": "Durgiana Temple", "description": "See the Hindu temple set beside a sacred pool.", "durationHours": 1.5},
+        {"name": "Hall Bazaar", "description": "Browse traditional shops and sample Punjabi street food.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [5, 6], "avoidReason": "Summer heat can make daytime walking uncomfortable."},
+      "dailyBudgetINR": {"budget": 1500, "comfort": 4300, "luxury": 13000},
+      "gateway": {"airportCity": "Amritsar", "railCity": "Amritsar", "note": "Amritsar is the listed gateway city."},
+      "transfers": [
+        {"gatewayCity": "Amritsar", "gatewayType": "airport", "mode": "taxi", "distanceKm": 12, "durationHours": 0.4, "priceINR": [300, 850], "bookable": false},
+        {"gatewayCity": "Amritsar", "gatewayType": "rail", "mode": "taxi", "distanceKm": 2, "durationHours": 0.15, "priceINR": [100, 350], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 0.85, "peakMonths": [10, 11, 12], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-LEH", "name": "Leh-Ladakh", "state": "Ladakh", "themes": ["adventure", "nature", "culture", "spiritual"],
+      "attractions": [
+        {"name": "Leh Palace", "description": "Explore the former royal palace above Leh's old town.", "durationHours": 2},
+        {"name": "Shanti Stupa", "description": "Visit the hilltop stupa for a panoramic view of Leh.", "durationHours": 1.5},
+        {"name": "Thiksey Monastery", "description": "See the hill monastery and its assembly halls.", "durationHours": 2},
+        {"name": "Pangong Tso", "description": "Take a high-altitude lake excursion subject to road conditions.", "durationHours": 10},
+        {"name": "Nubra Valley", "description": "Travel through mountain passes to the high desert valley.", "durationHours": 10},
+        {"name": "Hall of Fame", "description": "Visit the Indian Army museum and memorial exhibits.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 5, "ideal": 8},
+      "season": {"bestMonths": [5, 6, 7, 8, 9], "bestLabel": "May-September", "avoidMonths": [11, 12, 1, 2, 3], "avoidReason": "Severe winter weather closes high roads and many services; acclimatization is essential."},
+      "dailyBudgetINR": {"budget": 3000, "comfort": 9000, "luxury": 26000},
+      "gateway": {"airportCity": "Delhi", "railCity": "Delhi", "note": "Leh has Kushok Bakula Rimpochee Airport but no railhead; Delhi is the closest listed connecting hub for onward flights."},
+      "transfers": [
+        {"gatewayCity": "Delhi", "gatewayType": "airport", "mode": "flight", "distanceKm": 610, "durationHours": 1.5, "priceINR": [4500, 15000], "bookable": false},
+        {"gatewayCity": "Delhi", "gatewayType": "rail", "mode": "flight", "distanceKm": 610, "durationHours": 1.5, "priceINR": [4500, 15000], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.5, "peakMonths": [6, 7, 8], "peakMultiplier": 1.5
+    },
+    {
+      "id": "DST-SXR", "name": "Srinagar", "state": "Jammu and Kashmir", "themes": ["nature", "adventure", "culture"],
+      "attractions": [
+        {"name": "Dal Lake", "description": "See the lake, houseboats, and traditional wooden boats.", "durationHours": 3},
+        {"name": "Mughal Gardens", "description": "Visit the terraced gardens of Shalimar, Nishat, or Chashme Shahi.", "durationHours": 3},
+        {"name": "Hazratbal Shrine", "description": "Visit the prominent white-domed shrine on Dal Lake's shore.", "durationHours": 1.5},
+        {"name": "Shankaracharya Temple", "description": "Climb to the hilltop temple and city viewpoint.", "durationHours": 2},
+        {"name": "Old Srinagar", "description": "Explore historic lanes, bridges, and traditional markets.", "durationHours": 2.5},
+        {"name": "Pari Mahal", "description": "See the terraced garden and views across Dal Lake.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 3, "ideal": 5},
+      "season": {"bestMonths": [4, 5, 6, 9, 10], "bestLabel": "April-June and September-October", "avoidMonths": [1, 2], "avoidReason": "Winter snow and cold can disrupt road excursions and some services."},
+      "dailyBudgetINR": {"budget": 2600, "comfort": 8000, "luxury": 24000},
+      "gateway": {"airportCity": "Delhi", "railCity": "Delhi", "note": "Srinagar has an airport but no direct rail link; Delhi is the listed connecting hub for onward flights."},
+      "transfers": [
+        {"gatewayCity": "Delhi", "gatewayType": "airport", "mode": "flight", "distanceKm": 650, "durationHours": 1.5, "priceINR": [4000, 14000], "bookable": false},
+        {"gatewayCity": "Delhi", "gatewayType": "rail", "mode": "taxi", "distanceKm": 800, "durationHours": 16, "priceINR": [12000, 24000], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.35, "peakMonths": [5, 6, 7], "peakMultiplier": 1.4
+    },
+    {
+      "id": "DST-DAR", "name": "Darjeeling", "state": "West Bengal", "themes": ["hills", "nature", "culture"],
+      "attractions": [
+        {"name": "Tiger Hill", "description": "See sunrise views of the Himalayan range when skies are clear.", "durationHours": 2},
+        {"name": "Darjeeling Himalayan Railway", "description": "Ride or view the heritage toy train and its mountain route.", "durationHours": 3},
+        {"name": "Batasia Loop", "description": "Visit the railway loop, garden, and memorial viewpoint.", "durationHours": 1},
+        {"name": "Himalayan Mountaineering Institute", "description": "Explore mountaineering exhibits and the nearby zoo.", "durationHours": 2.5},
+        {"name": "Tea gardens", "description": "Learn about regional tea cultivation at an operating estate.", "durationHours": 2},
+        {"name": "Peace Pagoda", "description": "Visit the hillside Buddhist monument and gardens.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 3, "ideal": 4},
+      "season": {"bestMonths": [3, 4, 5, 10, 11], "bestLabel": "March-May and October-November", "avoidMonths": [6, 7, 8, 9], "avoidReason": "Monsoon rain, cloud, and landslides may affect views and roads."},
+      "dailyBudgetINR": {"budget": 2300, "comfort": 6800, "luxury": 20000},
+      "gateway": {"airportCity": "Kolkata", "railCity": "Kolkata", "note": "Bagdogra and New Jalpaiguri are closer but outside the list; use Kolkata as a listed hub with a long transfer."},
+      "transfers": [
+        {"gatewayCity": "Kolkata", "gatewayType": "airport", "mode": "flight", "distanceKm": 450, "durationHours": 1.2, "priceINR": [3000, 8500], "bookable": false},
+        {"gatewayCity": "Kolkata", "gatewayType": "rail", "mode": "train", "distanceKm": 560, "durationHours": 9, "priceINR": [400, 3000], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.2, "peakMonths": [4, 5, 10, 11], "peakMultiplier": 1.3
+    },
+    {
+      "id": "DST-GANG", "name": "Gangtok", "state": "Sikkim", "themes": ["hills", "nature", "adventure", "culture"],
+      "attractions": [
+        {"name": "MG Marg", "description": "Walk Gangtok's pedestrian center and its cafes and shops.", "durationHours": 2},
+        {"name": "Rumtek Monastery", "description": "Visit the major Tibetan Buddhist monastery outside the city.", "durationHours": 3},
+        {"name": "Tsomgo Lake", "description": "Take a high-altitude lake excursion subject to permits and weather.", "durationHours": 6},
+        {"name": "Enchey Monastery", "description": "See the hilltop monastery overlooking Gangtok.", "durationHours": 1.5},
+        {"name": "Namgyal Institute of Tibetology", "description": "Explore collections on Tibetan culture and Buddhism.", "durationHours": 1.5},
+        {"name": "Tashi View Point", "description": "Look toward the surrounding mountain ranges on a clear day.", "durationHours": 1}
+      ],
+      "suggestedDurationDays": {"min": 3, "ideal": 5},
+      "season": {"bestMonths": [3, 4, 5, 10, 11], "bestLabel": "March-May and October-November", "avoidMonths": [6, 7, 8, 9], "avoidReason": "Monsoon landslides can close mountain roads and obscure views."},
+      "dailyBudgetINR": {"budget": 2500, "comfort": 7500, "luxury": 22000},
+      "gateway": {"airportCity": "Kolkata", "railCity": "Kolkata", "note": "Pakyong and Bagdogra airports and nearby railheads are not in the city list; use Kolkata with longer transfers."},
+      "transfers": [
+        {"gatewayCity": "Kolkata", "gatewayType": "airport", "mode": "flight", "distanceKm": 540, "durationHours": 1.2, "priceINR": [3500, 10000], "bookable": false},
+        {"gatewayCity": "Kolkata", "gatewayType": "rail", "mode": "train", "distanceKm": 670, "durationHours": 10, "priceINR": [450, 3500], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.25, "peakMonths": [4, 5, 10, 11], "peakMultiplier": 1.3
+    },
+    {
+      "id": "DST-MUN", "name": "Munnar", "state": "Kerala", "themes": ["hills", "nature", "adventure"],
+      "attractions": [
+        {"name": "Eravikulam National Park", "description": "Explore the high-altitude grasslands and Nilgiri tahr habitat.", "durationHours": 4},
+        {"name": "Tea Museum", "description": "Learn about the history and processing of Munnar tea.", "durationHours": 1.5},
+        {"name": "Mattupetty Dam", "description": "See the reservoir and surrounding mountain scenery.", "durationHours": 2},
+        {"name": "Top Station", "description": "Visit a high viewpoint over the Western Ghats.", "durationHours": 3},
+        {"name": "Attukad Waterfalls", "description": "See a seasonal waterfall amid tea-covered slopes.", "durationHours": 1.5},
+        {"name": "Kundala Lake", "description": "Relax by the lake and nearby tea estates.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 4},
+      "season": {"bestMonths": [9, 10, 11, 12, 1, 2, 3], "bestLabel": "September-March", "avoidMonths": [6, 7, 8], "avoidReason": "Heavy monsoon rain can cause landslides and close trails."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 6500, "luxury": 20000},
+      "gateway": {"airportCity": "Kochi", "railCity": "Kochi", "note": "Kochi is the nearest listed airport and rail hub; Munnar has no railhead."},
+      "transfers": [
+        {"gatewayCity": "Kochi", "gatewayType": "airport", "mode": "taxi", "distanceKm": 110, "durationHours": 4, "priceINR": [3000, 6500], "bookable": false},
+        {"gatewayCity": "Kochi", "gatewayType": "rail", "mode": "bus", "distanceKm": 125, "durationHours": 4.5, "priceINR": [250, 900], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.2, "peakMonths": [12, 1], "peakMultiplier": 1.3
+    },
+    {
+      "id": "DST-ALP", "name": "Alleppey", "state": "Kerala", "themes": ["nature", "food", "culture"],
+      "attractions": [
+        {"name": "Alappuzha Backwaters", "description": "Experience the waterways and village scenery by boat.", "durationHours": 4},
+        {"name": "Alappuzha Beach", "description": "Walk the coastline and historic pier area.", "durationHours": 2},
+        {"name": "Vembanad Lake", "description": "See Kerala's large lake and its surrounding wetlands.", "durationHours": 3},
+        {"name": "Pathiramanal Island", "description": "Take a boat excursion to a bird-rich lake island.", "durationHours": 3},
+        {"name": "Krishnapuram Palace", "description": "Visit the palace museum and its mural collection.", "durationHours": 2},
+        {"name": "Marari Beach", "description": "Relax on a quieter stretch of the Arabian Sea coast.", "durationHours": 3}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [6, 7, 8], "avoidReason": "Monsoon conditions can affect boat schedules and beach activities."},
+      "dailyBudgetINR": {"budget": 2000, "comfort": 6000, "luxury": 18000},
+      "gateway": {"airportCity": "Kochi", "railCity": "Kochi", "note": "Kochi is the nearest listed airport city; Alleppey itself has a rail station outside the configured city list."},
+      "transfers": [
+        {"gatewayCity": "Kochi", "gatewayType": "airport", "mode": "taxi", "distanceKm": 85, "durationHours": 2.5, "priceINR": [2200, 4800], "bookable": false},
+        {"gatewayCity": "Kochi", "gatewayType": "rail", "mode": "train", "distanceKm": 55, "durationHours": 1.5, "priceINR": [100, 700], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.05, "peakMonths": [12, 1], "peakMultiplier": 1.25
+    },
+    {
+      "id": "DST-KOC", "name": "Kochi", "state": "Kerala", "themes": ["culture", "food", "nature"],
+      "attractions": [
+        {"name": "Fort Kochi", "description": "Explore the colonial-era waterfront and heritage lanes.", "durationHours": 3},
+        {"name": "Chinese Fishing Nets", "description": "See the iconic fishing structures along the harbor.", "durationHours": 1},
+        {"name": "Mattancherry Palace", "description": "Visit the palace museum and its mural galleries.", "durationHours": 1.5},
+        {"name": "Paradesi Synagogue", "description": "See the historic synagogue and surrounding Jew Town.", "durationHours": 1.5},
+        {"name": "Kerala Folklore Museum", "description": "Explore regional art, architecture, and cultural collections.", "durationHours": 2},
+        {"name": "Marine Drive", "description": "Walk the waterfront promenade in central Kochi.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [6, 7, 8], "avoidReason": "Southwest monsoon rain can interrupt outdoor sightseeing."},
+      "dailyBudgetINR": {"budget": 2000, "comfort": 6000, "luxury": 18000},
+      "gateway": {"airportCity": "Kochi", "railCity": "Kochi", "note": "Kochi is the listed gateway city."},
+      "transfers": [
+        {"gatewayCity": "Kochi", "gatewayType": "airport", "mode": "taxi", "distanceKm": 30, "durationHours": 0.9, "priceINR": [800, 1800], "bookable": false},
+        {"gatewayCity": "Kochi", "gatewayType": "rail", "mode": "taxi", "distanceKm": 5, "durationHours": 0.3, "priceINR": [180, 550], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.05, "peakMonths": [12, 1], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-OOY", "name": "Ooty", "state": "Tamil Nadu", "themes": ["hills", "nature", "culture"],
+      "attractions": [
+        {"name": "Government Botanical Garden", "description": "Walk among landscaped gardens on the Nilgiri slopes.", "durationHours": 2},
+        {"name": "Ooty Lake", "description": "Visit the lakefront recreation and boating area.", "durationHours": 2},
+        {"name": "Nilgiri Mountain Railway", "description": "Ride a scenic section of the UNESCO-listed mountain railway.", "durationHours": 4},
+        {"name": "Doddabetta Peak", "description": "See wide Nilgiri views from the district's high point.", "durationHours": 2},
+        {"name": "Rose Garden", "description": "Explore terraced gardens with extensive rose collections.", "durationHours": 1.5},
+        {"name": "Tea Factory and Museum", "description": "Learn about tea production and sample local varieties.", "durationHours": 1.5}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [3, 4, 5, 9, 10, 11], "bestLabel": "March-June and September-November", "avoidMonths": [7, 8], "avoidReason": "Monsoon showers can reduce visibility and affect hill roads."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 6500, "luxury": 19000},
+      "gateway": {"airportCity": "Coimbatore", "railCity": "Coimbatore", "note": "Coimbatore is the nearest listed major airport and rail hub; Mettupalayam is closer for the mountain train."},
+      "transfers": [
+        {"gatewayCity": "Coimbatore", "gatewayType": "airport", "mode": "taxi", "distanceKm": 90, "durationHours": 3.5, "priceINR": [2400, 5500], "bookable": false},
+        {"gatewayCity": "Coimbatore", "gatewayType": "rail", "mode": "train", "distanceKm": 85, "durationHours": 3, "priceINR": [150, 900], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.2, "peakMonths": [4, 5, 6], "peakMultiplier": 1.35
+    },
+    {
+      "id": "DST-MYS", "name": "Mysuru", "state": "Karnataka", "themes": ["culture", "food", "nature"],
+      "attractions": [
+        {"name": "Mysore Palace", "description": "Tour the grand royal palace and its richly decorated halls.", "durationHours": 2.5},
+        {"name": "Chamundi Hill", "description": "Visit the hilltop temple and city viewpoints.", "durationHours": 2},
+        {"name": "Brindavan Gardens", "description": "Walk the landscaped gardens near the KRS dam.", "durationHours": 2.5},
+        {"name": "St. Philomena's Cathedral", "description": "See the neo-Gothic church and its twin spires.", "durationHours": 1},
+        {"name": "Devaraja Market", "description": "Browse flower, produce, spice, and incense stalls.", "durationHours": 1.5},
+        {"name": "Mysuru Zoo", "description": "Visit one of India's historic zoological gardens.", "durationHours": 3}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5], "avoidReason": "Pre-monsoon heat makes midday outdoor visits less comfortable."},
+      "dailyBudgetINR": {"budget": 1700, "comfort": 5000, "luxury": 15000},
+      "gateway": {"airportCity": "Bengaluru", "railCity": "Bengaluru", "note": "Bengaluru is the nearest listed transport-data city; Mysuru has a local airport and railhead with a simulated onward connection."},
+      "transfers": [
+        {"gatewayCity": "Bengaluru", "gatewayType": "airport", "mode": "taxi", "distanceKm": 180, "durationHours": 4, "priceINR": [4000, 8000], "bookable": false},
+        {"gatewayCity": "Bengaluru", "gatewayType": "rail", "mode": "train", "distanceKm": 140, "durationHours": 2.5, "priceINR": [180, 900], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.0, "peakMonths": [10, 11, 12], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-HAM", "name": "Hampi", "state": "Karnataka", "themes": ["culture", "adventure", "nature"],
+      "attractions": [
+        {"name": "Virupaksha Temple", "description": "Visit the active temple at the heart of historic Hampi.", "durationHours": 1.5},
+        {"name": "Vittala Temple Complex", "description": "Explore the monumental temple grounds and stone chariot.", "durationHours": 3},
+        {"name": "Hemakuta Hill", "description": "Walk among hilltop shrines and sunset viewpoints.", "durationHours": 2},
+        {"name": "Royal Enclosure", "description": "See the remains of the Vijayanagara royal complex.", "durationHours": 2.5},
+        {"name": "Matanga Hill", "description": "Hike to a panoramic view across the boulder landscape.", "durationHours": 3},
+        {"name": "Achyutaraya Temple", "description": "Visit the quieter temple complex and bazaar ruins.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2], "bestLabel": "October-February", "avoidMonths": [4, 5, 6], "avoidReason": "High temperatures make long exposed walks difficult."},
+      "dailyBudgetINR": {"budget": 1600, "comfort": 4500, "luxury": 13000},
+      "gateway": {"airportCity": "Bengaluru", "railCity": "Bengaluru", "note": "Hospet is the nearby railhead but is not in the list; Bengaluru is a listed hub with a long transfer."},
+      "transfers": [
+        {"gatewayCity": "Bengaluru", "gatewayType": "airport", "mode": "taxi", "distanceKm": 340, "durationHours": 6.5, "priceINR": [7000, 13000], "bookable": false},
+        {"gatewayCity": "Bengaluru", "gatewayType": "rail", "mode": "train", "distanceKm": 330, "durationHours": 7, "priceINR": [350, 2200], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 0.95, "peakMonths": [11, 12, 1], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-COO", "name": "Coorg", "state": "Karnataka", "themes": ["hills", "nature", "food", "adventure"],
+      "attractions": [
+        {"name": "Abbey Falls", "description": "Walk to the waterfall viewpoint through coffee country.", "durationHours": 1.5},
+        {"name": "Raja's Seat", "description": "See the valley viewpoint and landscaped garden in Madikeri.", "durationHours": 1},
+        {"name": "Dubare Elephant Camp", "description": "Visit the riverside conservation and interpretation area.", "durationHours": 3},
+        {"name": "Talakaveri", "description": "Reach the hilltop source area associated with the Kaveri River.", "durationHours": 3},
+        {"name": "Namdroling Monastery", "description": "Explore the Tibetan Buddhist monastery at Bylakuppe.", "durationHours": 2},
+        {"name": "Coffee estate walk", "description": "Learn about regional coffee cultivation on a local estate.", "durationHours": 2}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 4},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [6, 7, 8], "avoidReason": "Heavy monsoon rain can affect trails and winding roads."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 7000, "luxury": 22000},
+      "gateway": {"airportCity": "Bengaluru", "railCity": "Bengaluru", "note": "Bengaluru is the closest listed access hub; Coorg has no major airport or railhead, so onward travel is a long simulated transfer."},
+      "transfers": [
+        {"gatewayCity": "Bengaluru", "gatewayType": "airport", "mode": "taxi", "distanceKm": 265, "durationHours": 5.5, "priceINR": [5000, 9500], "bookable": false},
+        {"gatewayCity": "Bengaluru", "gatewayType": "rail", "mode": "taxi", "distanceKm": 250, "durationHours": 5, "priceINR": [4800, 9000], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.2, "peakMonths": [12, 1], "peakMultiplier": 1.3
+    },
+    {
+      "id": "DST-PDY", "name": "Pondicherry", "state": "Puducherry", "themes": ["beach", "culture", "food"],
+      "attractions": [
+        {"name": "White Town", "description": "Walk the French-era streets, cafes, and pastel facades.", "durationHours": 2.5},
+        {"name": "Sri Aurobindo Ashram", "description": "Visit the spiritual community's public spaces respectfully.", "durationHours": 1.5},
+        {"name": "Promenade Beach", "description": "Stroll along the seafront boulevard and memorials.", "durationHours": 1.5},
+        {"name": "Auroville", "description": "Explore the international township visitor center and grounds.", "durationHours": 3},
+        {"name": "Puducherry Museum", "description": "See local archaeology, sculpture, and colonial-era objects.", "durationHours": 1.5},
+        {"name": "Paradise Beach", "description": "Take a boat to the sandy beach across the backwaters.", "durationHours": 3}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [11, 12, 1, 2, 3], "bestLabel": "November-March", "avoidMonths": [5, 6, 10], "avoidReason": "Hot weather and northeast monsoon showers can disrupt outdoor plans."},
+      "dailyBudgetINR": {"budget": 1900, "comfort": 5800, "luxury": 17000},
+      "gateway": {"airportCity": "Chennai", "railCity": "Chennai", "note": "Puducherry has a small airport and local rail station; Chennai is the nearest listed major hub."},
+      "transfers": [
+        {"gatewayCity": "Chennai", "gatewayType": "airport", "mode": "taxi", "distanceKm": 150, "durationHours": 3.5, "priceINR": [3500, 7000], "bookable": false},
+        {"gatewayCity": "Chennai", "gatewayType": "rail", "mode": "bus", "distanceKm": 170, "durationHours": 4, "priceINR": [250, 1000], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.05, "peakMonths": [12, 1], "peakMultiplier": 1.25
+    },
+    {
+      "id": "DST-IXZ", "name": "Port Blair (Andaman)", "state": "Andaman and Nicobar Islands", "themes": ["beach", "nature", "adventure", "wildlife"],
+      "attractions": [
+        {"name": "Cellular Jail", "description": "Tour the national memorial and learn about its history.", "durationHours": 2},
+        {"name": "Corbyn's Cove", "description": "Visit the coastal beach close to Port Blair.", "durationHours": 2},
+        {"name": "Samudrika Naval Marine Museum", "description": "Explore exhibits on island ecology and marine life.", "durationHours": 1.5},
+        {"name": "Chidiya Tapu", "description": "See forested coastline and a popular sunset viewpoint.", "durationHours": 3},
+        {"name": "Ross Island (Netaji Subhas Chandra Bose Island)", "description": "Take a boat to the historic island and forest ruins.", "durationHours": 4},
+        {"name": "Mahatma Gandhi Marine National Park", "description": "Visit permitted island and reef areas subject to local rules.", "durationHours": 5}
+      ],
+      "suggestedDurationDays": {"min": 3, "ideal": 6},
+      "season": {"bestMonths": [11, 12, 1, 2, 3, 4], "bestLabel": "November-April", "avoidMonths": [6, 7, 8, 9], "avoidReason": "Southwest monsoon seas can cancel ferries and water activities."},
+      "dailyBudgetINR": {"budget": 2800, "comfort": 8500, "luxury": 25000},
+      "gateway": {"airportCity": "Chennai", "railCity": "Chennai", "note": "Port Blair has Veer Savarkar International Airport and no railways; Chennai or Kolkata are listed flight gateways."},
+      "transfers": [
+        {"gatewayCity": "Chennai", "gatewayType": "airport", "mode": "flight", "distanceKm": 1370, "durationHours": 2.3, "priceINR": [5500, 18000], "bookable": false},
+        {"gatewayCity": "Chennai", "gatewayType": "rail", "mode": "flight", "distanceKm": 1370, "durationHours": 2.3, "priceINR": [5500, 18000], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 1.5, "peakMonths": [12, 1, 2], "peakMultiplier": 1.45
+    },
+    {
+      "id": "DST-LON", "name": "Lonavala-Mahabaleshwar", "state": "Maharashtra", "themes": ["hills", "nature", "adventure"],
+      "attractions": [
+        {"name": "Lonavala Bhushi Dam", "description": "Visit the seasonal dam and surrounding hill scenery.", "durationHours": 2},
+        {"name": "Karla Caves", "description": "Explore the ancient Buddhist rock-cut cave complex.", "durationHours": 2},
+        {"name": "Lohagad Fort", "description": "Hike to the hill fort when trails and weather permit.", "durationHours": 4},
+        {"name": "Mahabaleshwar viewpoints", "description": "See the plateau's valleys and forested escarpments.", "durationHours": 2},
+        {"name": "Venna Lake", "description": "Enjoy the lakefront and boating area in Mahabaleshwar.", "durationHours": 2},
+        {"name": "Pratapgad Fort", "description": "Tour the historic hill fort above the Konkan landscape.", "durationHours": 4}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 4},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [6, 7, 8], "avoidReason": "Heavy monsoon rain may cause landslides and close trails."},
+      "dailyBudgetINR": {"budget": 2200, "comfort": 7000, "luxury": 21000},
+      "gateway": {"airportCity": "Pune", "railCity": "Pune", "note": "Pune is a listed hub for the Lonavala-Mahabaleshwar circuit; Mumbai is another access point."},
+      "transfers": [
+        {"gatewayCity": "Pune", "gatewayType": "airport", "mode": "taxi", "distanceKm": 120, "durationHours": 3.5, "priceINR": [3000, 7000], "bookable": false},
+        {"gatewayCity": "Pune", "gatewayType": "rail", "mode": "train", "distanceKm": 65, "durationHours": 1.5, "priceINR": [100, 700], "bookable": false}
+      ],
+      "directAirport": false, "hotelPriceMultiplier": 1.15, "peakMonths": [6, 7, 8, 12], "peakMultiplier": 1.35
+    },
+    {
+      "id": "DST-JDP", "name": "Jagdalpur-Chitrakote", "state": "Chhattisgarh", "themes": ["nature", "wildlife", "adventure"],
+      "attractions": [
+        {"name": "Chitrakote Falls", "description": "See the broad horseshoe waterfall on the Indravati River.", "durationHours": 3},
+        {"name": "Tirathgarh Falls", "description": "Visit the stepped waterfall in Kanger Valley National Park.", "durationHours": 3},
+        {"name": "Kanger Valley National Park", "description": "Explore forest landscapes and wildlife habitats in season.", "durationHours": 5},
+        {"name": "Kutumsar Cave", "description": "Visit the limestone cave with authorized local guidance.", "durationHours": 3},
+        {"name": "Anthropological Museum", "description": "Learn about Bastar's communities, crafts, and traditions.", "durationHours": 1.5},
+        {"name": "Danteshwari Temple", "description": "Visit the historic temple in nearby Dantewada.", "durationHours": 5}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 4},
+      "season": {"bestMonths": [10, 11, 12, 1, 2], "bestLabel": "October-February", "avoidMonths": [7, 8, 9], "avoidReason": "Monsoon flooding and forest access restrictions may affect waterfall and cave visits."},
+      "dailyBudgetINR": {"budget": 1300, "comfort": 3800, "luxury": 10000},
+      "gateway": {"airportCity": "Raipur", "railCity": "Raipur", "note": "Jagdalpur has local transport links but the listed gateway is Raipur; onward transfer is long."},
+      "transfers": [
+        {"gatewayCity": "Raipur", "gatewayType": "airport", "mode": "flight", "distanceKm": 280, "durationHours": 1, "priceINR": [2200, 7000], "bookable": false},
+        {"gatewayCity": "Raipur", "gatewayType": "rail", "mode": "train", "distanceKm": 300, "durationHours": 6, "priceINR": [250, 1600], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 0.8, "peakMonths": [10, 11, 12], "peakMultiplier": 1.2
+    },
+    {
+      "id": "DST-KHA", "name": "Khajuraho", "state": "Madhya Pradesh", "themes": ["culture", "spiritual", "adventure"],
+      "attractions": [
+        {"name": "Western Group of Temples", "description": "Explore the UNESCO-listed temples and intricate sandstone carvings.", "durationHours": 3},
+        {"name": "Eastern Group of Temples", "description": "Visit Jain and Hindu temples in the eastern temple group.", "durationHours": 2},
+        {"name": "Southern Group of Temples", "description": "See the quieter temples south of the main complex.", "durationHours": 1.5},
+        {"name": "Archaeological Museum", "description": "View sculptures and artifacts from the Khajuraho region.", "durationHours": 1.5},
+        {"name": "Raneh Falls", "description": "Visit the Ken River canyon and seasonal falls.", "durationHours": 4},
+        {"name": "Panna National Park", "description": "Take a wildlife excursion subject to park season and permits.", "durationHours": 6}
+      ],
+      "suggestedDurationDays": {"min": 2, "ideal": 3},
+      "season": {"bestMonths": [10, 11, 12, 1, 2, 3], "bestLabel": "October-March", "avoidMonths": [4, 5, 6], "avoidReason": "Extreme summer heat affects outdoor temple visits."},
+      "dailyBudgetINR": {"budget": 1600, "comfort": 4800, "luxury": 14000},
+      "gateway": {"airportCity": "Bhopal", "railCity": "Bhopal", "note": "Khajuraho has a local airport and railhead but neither is in the city list; Bhopal is a listed hub, with Varanasi also used for some routes."},
+      "transfers": [
+        {"gatewayCity": "Bhopal", "gatewayType": "airport", "mode": "flight", "distanceKm": 350, "durationHours": 1.2, "priceINR": [2800, 8500], "bookable": false},
+        {"gatewayCity": "Bhopal", "gatewayType": "rail", "mode": "train", "distanceKm": 365, "durationHours": 7, "priceINR": [300, 2300], "bookable": false}
+      ],
+      "directAirport": true, "hotelPriceMultiplier": 0.9, "peakMonths": [11, 12, 1, 2], "peakMultiplier": 1.25
+    }
+  ]
+}

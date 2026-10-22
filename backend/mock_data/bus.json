@@ -1,0 +1,6 @@
+[
+  {"id": "BUS001", "operator": "IntrCity SmartBus", "bus_no": "ISB-204", "source": "Delhi", "destination": "Agra", "departure": "06:30", "arrival": "10:15", "duration": "3h 45m", "price": 699, "seats_available": 9, "class": "AC Seater"},
+  {"id": "BUS002", "operator": "Zingbus", "bus_no": "ZB-118", "source": "Delhi", "destination": "Agra", "departure": "08:00", "arrival": "11:30", "duration": "3h 30m", "price": 849, "seats_available": 6, "class": "AC Sleeper"},
+  {"id": "BUS003", "operator": "UPSRTC Janrath", "bus_no": "UP-78-FT-9210", "source": "Delhi", "destination": "Agra", "departure": "09:15", "arrival": "13:30", "duration": "4h 15m", "price": 520, "seats_available": 14, "class": "AC Seater"},
+  {"id": "BUS004", "operator": "MSRTC Shivneri", "bus_no": "MH-14-BT-4421", "source": "Mumbai", "destination": "Pune", "departure": "07:00", "arrival": "10:45", "duration": "3h 45m", "price": 515, "seats_available": 11, "class": "AC Seater"}
+]

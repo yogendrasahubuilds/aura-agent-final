@@ -1,11 +1,18 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Clock, Users, Film, Hotel, Plane, AlertTriangle } from "lucide-react";
+import { MapPin, Calendar, Clock, Users, Film, Hotel, Plane, AlertTriangle, Info as InfoIcon } from "lucide-react";
 
 const LABELS = {
   movie: "Movie Booking",
   hotel: "Hotel Booking",
   flight: "Flight Booking",
+  train: "Train Search",
+  bus: "Bus Search",
+  concert: "Concert Search",
+  cricket: "Cricket Search",
+  trip: "Trip Plan",
+  trip_planner: "Trip Plan",
+  budget_optimizer: "Budget Plan",
   unknown: "Not Understood",
 };
 
@@ -13,6 +20,13 @@ const COLORS = {
   movie: "bg-rose-50 text-rose-700 border-rose-200",
   hotel: "bg-emerald-50 text-emerald-700 border-emerald-200",
   flight: "bg-blue-50 text-blue-700 border-blue-200",
+  train: "bg-blue-50 text-blue-700 border-blue-200",
+  bus: "bg-blue-50 text-blue-700 border-blue-200",
+  concert: "bg-purple-50 text-purple-700 border-purple-200",
+  cricket: "bg-amber-50 text-amber-700 border-amber-200",
+  trip: "bg-indigo-50 text-indigo-700 border-indigo-200",
+  trip_planner: "bg-indigo-50 text-indigo-700 border-indigo-200",
+  budget_optimizer: "bg-emerald-50 text-emerald-700 border-emerald-200",
   unknown: "bg-slate-50 text-slate-700 border-slate-200",
 };
 
@@ -61,6 +75,10 @@ export default function ParametersCard({ intent, params, missing }) {
             <Row icon={Users} label="Passengers" value={params.passengers} />
           </>
         )}
+        {!["movie", "hotel", "flight"].includes(intent) &&
+          Object.entries(params || {}).filter(([, value]) => value != null && value !== "").map(([key, value]) => (
+            <Row key={key} icon={InfoIcon} label={key.replaceAll("_", " ")} value={String(value)} />
+          ))}
       </div>
       {missing?.length > 0 && (
         <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">

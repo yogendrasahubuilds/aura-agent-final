@@ -21,20 +21,20 @@ MOVIES = [
 
 HOTELS = [
     # Raipur
-    {"id": "H001", "hotel": "Hotel Babylon Inn", "city": "Raipur", "location": "Jail Road, Raipur, Chhattisgarh", "room_type": "Deluxe Room", "price_per_night": 2500, "rooms_available": 5, "rating": 4.1, "amenities": ["Free WiFi", "Breakfast", "AC"]},
-    {"id": "H002", "hotel": "Sayaji Hotel Raipur", "city": "Raipur", "location": "VIP Road, Raipur", "room_type": "Executive Suite", "price_per_night": 5800, "rooms_available": 3, "rating": 4.6, "amenities": ["Pool", "Spa", "Breakfast", "Gym"]},
-    {"id": "H003", "hotel": "The Celebration Hotel", "city": "Raipur", "location": "Civil Lines, Raipur", "room_type": "Premium Room", "price_per_night": 3400, "rooms_available": 8, "rating": 4.3, "amenities": ["WiFi", "Restaurant", "Parking"]},
+    {"id": "H001", "hotel": "Jail Road Deluxe Stay", "city": "Raipur", "location": "Jail Road, Raipur, Chhattisgarh", "room_type": "Deluxe Room", "price_per_night": 2500, "rooms_available": 5, "rating": 4.1, "amenities": ["Free WiFi", "Breakfast", "AC"], "category": "3-star", "star_rating": 3},
+    {"id": "H002", "hotel": "VIP Road Club Stay", "city": "Raipur", "location": "VIP Road, Raipur", "room_type": "Club Room", "price_per_night": 5800, "rooms_available": 3, "rating": 4.6, "amenities": ["Pool", "Spa", "Breakfast", "Gym"], "category": "4-star", "star_rating": 4},
+    {"id": "H003", "hotel": "Civil Lines Deluxe Lodge", "city": "Raipur", "location": "Civil Lines, Raipur", "room_type": "Deluxe Room", "price_per_night": 3400, "rooms_available": 8, "rating": 4.3, "amenities": ["WiFi", "Restaurant", "Parking"], "category": "3-star", "star_rating": 3},
     # Bhilai
-    {"id": "H004", "hotel": "Hotel Grand Bhilai", "city": "Bhilai", "location": "Nehru Nagar, Bhilai", "room_type": "Standard Double", "price_per_night": 1800, "rooms_available": 10, "rating": 3.9, "amenities": ["WiFi", "AC", "Restaurant"]},
-    {"id": "H005", "hotel": "Hotel Shri Krishna", "city": "Bhilai", "location": "Supela, Bhilai", "room_type": "Deluxe", "price_per_night": 2200, "rooms_available": 4, "rating": 4.0, "amenities": ["WiFi", "Breakfast"]},
+    {"id": "H004", "hotel": "Nehru Nagar Standard Inn", "city": "Bhilai", "location": "Nehru Nagar, Bhilai", "room_type": "Standard Room", "price_per_night": 1800, "rooms_available": 10, "rating": 3.9, "amenities": ["WiFi", "AC", "Restaurant"], "category": "2-star", "star_rating": 2},
+    {"id": "H005", "hotel": "Supela City Rooms", "city": "Bhilai", "location": "Supela, Bhilai", "room_type": "Standard Room", "price_per_night": 2200, "rooms_available": 4, "rating": 4.0, "amenities": ["WiFi", "Breakfast"], "category": "2-star", "star_rating": 2},
     # Delhi
-    {"id": "H006", "hotel": "Taj Palace New Delhi", "city": "Delhi", "location": "Diplomatic Enclave, New Delhi", "room_type": "Luxury King Room", "price_per_night": 14500, "rooms_available": 6, "rating": 4.8, "amenities": ["Pool", "Spa", "Fine Dining", "Butler"]},
-    {"id": "H007", "hotel": "The Lalit New Delhi", "city": "Delhi", "location": "Barakhamba Road, Connaught Place", "room_type": "Deluxe Room", "price_per_night": 9200, "rooms_available": 12, "rating": 4.5, "amenities": ["Gym", "Pool", "Breakfast"]},
+    {"id": "H006", "hotel": "Diplomatic Enclave Signature Suites", "city": "Delhi", "location": "Diplomatic Enclave, New Delhi", "room_type": "Suite", "price_per_night": 14500, "rooms_available": 6, "rating": 4.8, "amenities": ["Pool", "Spa", "Fine Dining", "Butler"], "category": "5-star", "star_rating": 5},
+    {"id": "H007", "hotel": "Barakhamba Grand Suites", "city": "Delhi", "location": "Barakhamba Road, Connaught Place", "room_type": "Suite", "price_per_night": 9200, "rooms_available": 12, "rating": 4.5, "amenities": ["Gym", "Pool", "Breakfast"], "category": "5-star", "star_rating": 5},
     # Mumbai
-    {"id": "H008", "hotel": "JW Marriott Mumbai Juhu", "city": "Mumbai", "location": "Juhu Tara Road, Mumbai", "room_type": "Executive Suite", "price_per_night": 18000, "rooms_available": 4, "rating": 4.7, "amenities": ["Beach view", "Pool", "Spa", "Breakfast"]},
-    {"id": "H009", "hotel": "The Fern Residency", "city": "Mumbai", "location": "Goregaon East, Mumbai", "room_type": "Club Room", "price_per_night": 6400, "rooms_available": 9, "rating": 4.2, "amenities": ["WiFi", "Gym", "Restaurant"]},
+    {"id": "H008", "hotel": "Juhu Tara Signature Suites", "city": "Mumbai", "location": "Juhu Tara Road, Mumbai", "room_type": "Suite", "price_per_night": 18000, "rooms_available": 4, "rating": 4.7, "amenities": ["Beach view", "Pool", "Spa", "Breakfast"], "category": "5-star", "star_rating": 5},
+    {"id": "H009", "hotel": "Goregaon Club Stay", "city": "Mumbai", "location": "Goregaon East, Mumbai", "room_type": "Club Room", "price_per_night": 6400, "rooms_available": 9, "rating": 4.2, "amenities": ["WiFi", "Gym", "Restaurant"], "category": "4-star", "star_rating": 4},
     # Bengaluru
-    {"id": "H010", "hotel": "The Leela Palace Bengaluru", "city": "Bengaluru", "location": "Old Airport Road, Bengaluru", "room_type": "Royal Club Room", "price_per_night": 15600, "rooms_available": 5, "rating": 4.9, "amenities": ["Pool", "Spa", "Butler", "Fine Dining"]},
+    {"id": "H010", "hotel": "Old Airport Road Grand Suites", "city": "Bengaluru", "location": "Old Airport Road, Bengaluru", "room_type": "Suite", "price_per_night": 15600, "rooms_available": 5, "rating": 4.9, "amenities": ["Pool", "Spa", "Butler", "Fine Dining"], "category": "5-star", "star_rating": 5},
 ]
 
 FLIGHTS = [

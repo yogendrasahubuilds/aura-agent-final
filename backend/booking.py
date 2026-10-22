@@ -3,7 +3,15 @@ import random
 import string
 from datetime import datetime, timezone
 
-PREFIX = {"movie": "AURA-MOV", "hotel": "AURA-HOT", "flight": "AURA-FLT"}
+PREFIX = {
+    "movie": "AURA-MOV",
+    "hotel": "AURA-HTL",
+    "flight": "AURA-FLT",
+    "train": "AURA-TRN",
+    "bus": "AURA-BUS",
+    "cricket": "AURA-CRK",
+    "concert": "AURA-CON",
+}
 
 
 def _gen_booking_id(intent: str) -> str:

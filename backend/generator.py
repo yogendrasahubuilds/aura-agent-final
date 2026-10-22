@@ -5,6 +5,10 @@ Generated options are cached in-memory keyed by their generated ID so booking ca
 """
 import random
 import hashlib
+import json
+import math
+from datetime import date as date_type, datetime, timedelta
+from pathlib import Path
 from typing import Optional, List
 
 # City database (title-case canonical name + airport metadata for flights)
@@ -46,11 +50,147 @@ CITIES = {
 
 CITY_ALIAS_TO_CANONICAL = {alias: name for name, meta in CITIES.items() for alias in meta["aliases"]}
 
+with (Path(__file__).parent / "config" / "cities.json").open(encoding="utf-8") as _city_file:
+    _CITY_CONFIG = json.load(_city_file)
+
+TRANSPORT_CITIES = {city["name"]: city for city in _CITY_CONFIG["cities"]}
+for _city in _CITY_CONFIG["cities"]:
+    CITY_ALIAS_TO_CANONICAL.setdefault(_city["name"].lower(), _city["name"])
+
 
 def resolve_city(name: Optional[str]) -> Optional[str]:
     if not name:
         return None
     return CITY_ALIAS_TO_CANONICAL.get(name.strip().lower(), name.strip().title() if name else None)
+
+
+def haversine_km(source: str, destination: str) -> Optional[int]:
+    """Return approximate great-circle distance between configured city centers."""
+    source_city = TRANSPORT_CITIES.get(resolve_city(source) or "")
+    destination_city = TRANSPORT_CITIES.get(resolve_city(destination) or "")
+    if not source_city or not destination_city:
+        return None
+    lat1, lon1 = math.radians(source_city["latitude"]), math.radians(source_city["longitude"])
+    lat2, lon2 = math.radians(destination_city["latitude"]), math.radians(destination_city["longitude"])
+    lat_delta = lat2 - lat1
+    lon_delta = lon2 - lon1
+    value = math.sin(lat_delta / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(lon_delta / 2) ** 2
+    return int(round(6371 * 2 * math.asin(math.sqrt(value))))
+
+
+def _transport_rng(mode: str, source: str, destination: str, travel_date: Optional[str]) -> random.Random:
+    return _rng(mode, resolve_city(source), resolve_city(destination), travel_date or "undated")
+
+
+def _travel_times(rng: random.Random, duration_minutes: int, travel_date: Optional[str]) -> tuple[str, str, str]:
+    departure = _random_time(rng)
+    try:
+        base_date = date_type.fromisoformat(travel_date) if travel_date else date_type(2000, 1, 1)
+    except ValueError:
+        base_date = date_type(2000, 1, 1)
+    depart_dt = datetime.combine(base_date, datetime.strptime(departure, "%H:%M").time())
+    arrival_dt = depart_dt + timedelta(minutes=duration_minutes)
+    return departure, arrival_dt.strftime("%H:%M"), arrival_dt.date().isoformat()
+
+
+def _peak_price_factor(travel_date: Optional[str]) -> float:
+    if not travel_date:
+        return 1.0
+    try:
+        month = date_type.fromisoformat(travel_date).month
+    except ValueError:
+        return 1.0
+    return 1.22 if month in {10, 11, 12, 1, 2, 5, 6} else 0.78
+
+
+def _cache_transport_options(intent: str, options: List[dict]) -> List[dict]:
+    for option in options:
+        _GENERATED_CACHE[option["id"]] = {"intent": intent, "data": option}
+    return options
+
+
+def _route_generated_id(prefix: str, mode: str, source: str, destination: str, travel_date: Optional[str], index: int) -> str:
+    return f"{prefix}-{_seed(mode, source, destination, travel_date or 'undated', index):012X}"
+
+
+def generate_trains(source: str, destination: str, count: int = 6, travel_date: Optional[str] = None) -> List[dict]:
+    source = resolve_city(source) or source
+    destination = resolve_city(destination) or destination
+    src_city = TRANSPORT_CITIES.get(source)
+    dst_city = TRANSPORT_CITIES.get(destination)
+    distance = haversine_km(source, destination)
+    if source == destination or not src_city or not dst_city or not src_city["railStations"] or not dst_city["railStations"]:
+        return []
+
+    rng = _transport_rng("trains", source, destination, travel_date)
+    duration_minutes = max(35, int(distance * 60 / rng.randint(55, 78)) + rng.randint(20, 80))
+    classes = ["SL", "3A", "2A", "1A", "SL", "3A", "2A", "1A"]
+    multipliers = [0.72, 1.0, 1.45, 2.35, 0.85, 1.2, 1.7, 2.9]
+    base_fare = max(250, int(distance * 0.78 + 100))
+    options = []
+    for index in range(min(max(count, 6), 8)):
+        departure, arrival, arrival_date = _travel_times(rng, duration_minutes, travel_date)
+        class_name = classes[index]
+        fare = int(round(base_fare * multipliers[index] / 10) * 10)
+        option_id = _route_generated_id("TRN", "train", source, destination, travel_date, index)
+        options.append({
+            "id": option_id,
+            "train_name": f"AURA Simulated {['Intercity', 'Express', 'Superfast', 'Premium', 'Passenger', 'Mail', 'Superfast', 'Premium'][index]}",
+            "train_no": f"SIM-{_seed(source, destination, travel_date or 'undated', index) % 100000:05d}",
+            "source": source,
+            "destination": destination,
+            "departure": departure,
+            "arrival": arrival,
+            "duration": f"{duration_minutes // 60}h {duration_minutes % 60:02d}m",
+            "price": fare,
+            "seats_available": rng.randint(8, 72),
+            "class": class_name,
+            "date": travel_date,
+            "arrival_date": arrival_date,
+            "distance_km": distance,
+            "generated": True,
+        })
+    return _cache_transport_options("train", options)
+
+
+def generate_buses(source: str, destination: str, count: int = 6, travel_date: Optional[str] = None) -> List[dict]:
+    source = resolve_city(source) or source
+    destination = resolve_city(destination) or destination
+    src_city = TRANSPORT_CITIES.get(source)
+    dst_city = TRANSPORT_CITIES.get(destination)
+    distance = haversine_km(source, destination)
+    if source == destination or not src_city or not dst_city or not src_city["busHub"] or not dst_city["busHub"] or distance is None or distance > 1000:
+        return []
+
+    rng = _transport_rng("buses", source, destination, travel_date)
+    duration_minutes = max(45, int(distance * 60 / rng.randint(52, 72)) + rng.randint(15, 60))
+    classes = ["Non-AC Seater", "AC Seater", "AC Sleeper", "Volvo", "AC Sleeper", "Volvo", "AC Seater", "Volvo"]
+    multipliers = [0.62, 0.95, 1.35, 1.85, 1.65, 2.4, 1.1, 3.1]
+    base_fare = max(250, int(distance * 1.15 + 120))
+    operators = ["IntrCity SmartBus", "Zingbus", "VRL Travels", "SRS Travels", "Orange Travels", "Neeta Travels", "KSRTC Airavat", "AURA Premium Coach"]
+    options = []
+    for index in range(min(max(count, 6), 8)):
+        departure, arrival, arrival_date = _travel_times(rng, duration_minutes, travel_date)
+        fare = int(round(base_fare * multipliers[index] / 10) * 10)
+        option_id = _route_generated_id("BUS", "bus", source, destination, travel_date, index)
+        options.append({
+            "id": option_id,
+            "operator": operators[index],
+            "bus_no": f"SIM-BUS-{_seed(source, destination, travel_date or 'undated', index) % 100000:05d}",
+            "source": source,
+            "destination": destination,
+            "departure": departure,
+            "arrival": arrival,
+            "duration": f"{duration_minutes // 60}h {duration_minutes % 60:02d}m",
+            "price": fare,
+            "seats_available": rng.randint(6, 42),
+            "class": classes[index],
+            "date": travel_date,
+            "arrival_date": arrival_date,
+            "distance_km": distance,
+            "generated": True,
+        })
+    return _cache_transport_options("bus", options)
 
 
 # ---------- Movies ----------
@@ -67,9 +207,13 @@ SHOW_TIMES = ["10:00", "12:30", "14:15", "15:45", "17:30", "18:45", "19:30", "20
 
 
 # ---------- Hotels ----------
-HOTEL_BRANDS = ["Taj", "ITC", "Oberoi", "JW Marriott", "Hyatt", "Radisson", "Sayaji", "Lemon Tree", "The Fern", "Ginger", "OYO Townhouse", "FabHotel", "Treebo", "The Park"]
-HOTEL_SUFFIXES = ["Palace", "Grand", "Residency", "Inn", "Boutique", "Signature", "Heritage", "Luxe", "Executive", "Comfort"]
-ROOM_TYPES = [("Standard Double", 0.9), ("Deluxe Room", 1.0), ("Premium Room", 1.25), ("Executive Suite", 1.65), ("Luxury King Room", 2.0), ("Royal Club Room", 2.4)]
+HOTEL_LOCALITY_TEMPLATES = {
+    "Hostel/Budget": ["{locality} Hostel", "{locality} Budget Stay"],
+    "2-star": ["{locality} Standard Inn", "{locality} City Rooms"],
+    "3-star": ["{locality} Deluxe Stay", "{locality} Comfort Lodge"],
+    "4-star": ["{locality} Superior Residence", "{locality} Club Stay"],
+    "5-star": ["{locality} Signature Suites", "{locality} Grand Suites"],
+}
 AMENITIES_POOL = ["Free WiFi", "Breakfast included", "Swimming Pool", "Spa", "Gym", "Airport Transfer", "Pet Friendly", "24h Room Service", "Parking", "Restaurant", "Business Center", "Butler"]
 
 
@@ -176,22 +320,39 @@ def generate_movies(city: str, movie_hint: Optional[str] = None, count: int = 6)
 def generate_hotels(city: str, count: int = 6) -> List[dict]:
     city = resolve_city(city) or city
     rng = _rng("hotels", city)
-    tier = _city_price_tier(city)
+    city_config = TRANSPORT_CITIES.get(city)
+    hotel_multiplier = city_config["hotelPriceMultiplier"] if city_config else 1.0
+    categories = [
+        ("Hostel/Budget", 600, 1200, ["Dorm Bed", "Basic Room"]),
+        ("2-star", 1200, 2500, ["Standard Room", "Standard Twin Room"]),
+        ("3-star", 2500, 4500, ["Deluxe Room", "Deluxe Twin Room"]),
+        ("4-star", 4500, 8000, ["Superior Room", "Club Room"]),
+        ("5-star", 8000, 20000, ["Suite", "Luxury Suite"]),
+    ]
+    category_choices = [
+        (category, low, high, room_types, index)
+        for index, (category, low, high, room_types) in enumerate(categories)
+    ]
+    choices = [
+        (category, low, high, room_types, category_index, variant)
+        for category, low, high, room_types, category_index in category_choices
+        for variant in range(2)
+    ]
+    category_first = [choice for choice in choices if choice[-1] == 0]
+    category_second = [choice for choice in choices if choice[-1] == 1]
+    balanced_choices = category_first + category_second
     results = []
-    for i in range(count):
-        brand = rng.choice(HOTEL_BRANDS)
-        suffix = rng.choice(HOTEL_SUFFIXES)
+    for i, (category, low, high, room_types, category_index, variant) in enumerate(balanced_choices[:max(0, min(count, len(balanced_choices)))]):
         locality = rng.choice(LOCALITIES)
-        room_type, room_mult = rng.choice(ROOM_TYPES)
-        base = rng.randint(1800, 7500)
-        price = int(round(base * tier * room_mult / 50) * 50)
+        room_type = room_types[variant]
+        price = int(round(rng.randint(low, high) * hotel_multiplier))
         rating = round(rng.uniform(3.6, 4.9), 1)
         amenities = rng.sample(AMENITIES_POOL, k=rng.randint(3, 6))
         aggregator = rng.choice(["Booking.com", "MakeMyTrip", "Goibibo", "Agoda", "Hotels.com"])
-        option_id = f"GHT-{_seed(city, brand, suffix, locality, i):x}"[:16].upper()
+        option_id = f"GHT-{_seed('hotels', city, category, variant):012X}"
         opt = {
             "id": option_id,
-            "hotel": f"{brand} {suffix} {city}",
+            "hotel": HOTEL_LOCALITY_TEMPLATES[category][variant].format(locality=locality),
             "city": city,
             "location": f"{locality}, {city}",
             "room_type": room_type,
@@ -200,11 +361,66 @@ def generate_hotels(city: str, count: int = 6) -> List[dict]:
             "rating": rating,
             "amenities": amenities,
             "provider": aggregator,
+            "category": category,
+            "star_rating": int(category[0]) if category[0].isdigit() else 0,
+            "simulated": True,
             "generated": True,
         }
         _GENERATED_CACHE[option_id] = {"intent": "hotel", "data": opt}
         results.append(opt)
     return results
+
+
+METRO_CITIES = {
+    "Agra", "Ahmedabad", "Bengaluru", "Bhopal", "Chennai", "Delhi",
+    "Hyderabad", "Indore", "Jaipur", "Kochi", "Kolkata", "Lucknow",
+    "Mumbai", "Nagpur", "Pune",
+}
+
+LOCAL_TRANSPORT_BASES = {
+    "metro": {
+        "Auto rickshaw": (650, 850),
+        "Taxi": (1900, 2700),
+        "Metro": (250, 500),
+        "Local bus": (80, 180),
+    },
+    "tier1": {
+        "Auto rickshaw": (450, 700),
+        "Taxi": (1400, 2200),
+        "Metro": (220, 420),
+        "Local bus": (70, 150),
+    },
+    "tier2": {
+        "Auto rickshaw": (300, 550),
+        "Taxi": (900, 1700),
+        "Metro": (180, 350),
+        "Local bus": (50, 120),
+    },
+}
+
+
+def generate_local_transport(city: str) -> List[dict]:
+    """Create stable simulated per-day local mobility estimates from the city profile."""
+    city = resolve_city(city) or city
+    city_config = TRANSPORT_CITIES.get(city)
+    tier = city_config["cityTier"] if city_config else "tier2"
+    rng = _rng("local-transport", city)
+    estimates = []
+    for mode, (low, high) in LOCAL_TRANSPORT_BASES[tier].items():
+        if mode == "Metro" and city not in METRO_CITIES:
+            continue
+        option_id = f"LOC-{_seed('local-transport', city, mode):012X}"
+        estimates.append({
+            "id": option_id,
+            "mode": mode,
+            "city": city,
+            "price_per_day": rng.randint(low, high),
+            "transport_type": mode.lower().replace(" ", "_"),
+            "simulated": True,
+            "generated": True,
+        })
+        _GENERATED_CACHE[option_id] = {"intent": "local_transport", "data": estimates[-1]}
+    return estimates
 
 
 def _random_time(rng) -> str:
@@ -220,31 +436,44 @@ def _add_minutes(hhmm: str, mins: int) -> str:
     return f"{total // 60:02d}:{total % 60:02d}"
 
 
-def generate_flights(source: str, destination: str, count: int = 6) -> List[dict]:
+def generate_flights(source: str, destination: str, count: int = 6, travel_date: Optional[str] = None) -> List[dict]:
     source = resolve_city(source) or source
     destination = resolve_city(destination) or destination
-    rng = _rng("flights", source, destination)
-    src_meta = CITIES.get(source, {}).get("airport") or (source[:3].upper(), f"{source} Airport")
-    dst_meta = CITIES.get(destination, {}).get("airport") or (destination[:3].upper(), f"{destination} Airport")
-    src_code, src_name = src_meta
-    dst_code, dst_name = dst_meta
+    src_city = TRANSPORT_CITIES.get(source)
+    dst_city = TRANSPORT_CITIES.get(destination)
+    distance = haversine_km(source, destination)
+    if (
+        source == destination
+        or not src_city
+        or not dst_city
+        or not src_city["airport"]
+        or not dst_city["airport"]
+        or distance is None
+        or distance <= 300
+    ):
+        return []
 
-    distance = _route_distance_proxy(source, destination)
-    duration = _duration_from_distance(distance)
-    dur_mins = int(distance / 10) + 25
-    base_fare = int(2200 + distance * 1.4)
+    rng = _transport_rng("flights", source, destination, travel_date)
+    src_meta = src_city["airport"]
+    dst_meta = dst_city["airport"]
+    src_code, src_name = src_meta["iata"], src_meta["name"]
+    dst_code, dst_name = dst_meta["iata"], dst_meta["name"]
+    dur_mins = max(40, int(distance / 690 * 60) + 35)
+    duration = f"{dur_mins // 60}h {dur_mins % 60:02d}m"
+    base_fare = max(1800, int(950 + distance * 2.15))
+    peak_factor = _peak_price_factor(travel_date)
+    classes = ["Economy", "Economy", "Economy", "Premium Economy", "Premium Economy", "Business", "Economy", "Business"]
+    fare_multipliers = [0.72, 0.9, 1.08, 1.45, 1.8, 2.65, 1.15, 3.15]
 
     results = []
-    for i in range(count):
-        airline, prefix = rng.choice(AIRLINES)
-        flight_num = f"{prefix}-{rng.randint(100, 9999)}"
-        dep = _random_time(rng)
-        arr = _add_minutes(dep, dur_mins)
-        cls, cls_mult = rng.choice(TRAVEL_CLASSES) if i < 2 else ("Economy", 1.0)
-        price_variation = rng.uniform(0.78, 1.35)
-        price = int(round(base_fare * cls_mult * price_variation / 50) * 50)
-        aggregator = rng.choice(["MakeMyTrip", "Cleartrip", "EaseMyTrip", "Yatra", "Goibibo", f"{airline} Direct"])
-        option_id = f"GFL-{_seed(source, destination, airline, flight_num, i):x}"[:16].upper()
+    for i in range(min(max(count, 6), 8)):
+        airline, prefix = AIRLINES[i % len(AIRLINES)]
+        flight_num = f"{prefix}-{_seed(source, destination, travel_date or 'undated', i) % 9000 + 1000:04d}"
+        dep, arr, arrival_date = _travel_times(rng, dur_mins, travel_date)
+        cls = classes[i]
+        price = int(round(base_fare * peak_factor * fare_multipliers[i] / 50) * 50)
+        aggregator = f"{airline} Direct"
+        option_id = _route_generated_id("GFL", "flight", source, destination, travel_date, i)
         opt = {
             "id": option_id,
             "airline": airline,
@@ -260,11 +489,13 @@ def generate_flights(source: str, destination: str, count: int = 6) -> List[dict
             "seats_available": rng.randint(4, 48),
             "class": cls,
             "provider": aggregator,
+            "date": travel_date,
+            "arrival_date": arrival_date,
+            "distance_km": distance,
             "generated": True,
         }
-        _GENERATED_CACHE[option_id] = {"intent": "flight", "data": opt}
         results.append(opt)
-    return results
+    return _cache_transport_options("flight", results)
 
 
 def get_cached_generated(option_id: str) -> Optional[dict]:

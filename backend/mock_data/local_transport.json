@@ -1,0 +1,6 @@
+[
+  {"id": "LOC001", "mode": "App cab", "city": "Goa", "price_per_day": 1800},
+  {"id": "LOC002", "mode": "Rental scooter", "city": "Goa", "price_per_day": 900},
+  {"id": "LOC003", "mode": "App cab", "city": "Delhi", "price_per_day": 2200},
+  {"id": "LOC004", "mode": "Metro and app cab", "city": "Mumbai", "price_per_day": 1500}
+]

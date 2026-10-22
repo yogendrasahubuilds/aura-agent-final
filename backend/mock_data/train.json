@@ -1,0 +1,6 @@
+[
+  {"id": "TRN001", "train_name": "Taj Express", "train_no": "12279", "source": "Delhi", "destination": "Agra", "departure": "06:55", "arrival": "09:35", "duration": "2h 40m", "price": 580, "seats_available": 34, "class": "AC Chair Car"},
+  {"id": "TRN002", "train_name": "Gatimaan Express", "train_no": "12049", "source": "Delhi", "destination": "Agra", "departure": "08:10", "arrival": "09:50", "duration": "1h 40m", "price": 1285, "seats_available": 18, "class": "Executive Chair Car"},
+  {"id": "TRN003", "train_name": "Bhopal Shatabdi Express", "train_no": "12002", "source": "Delhi", "destination": "Agra", "departure": "06:00", "arrival": "08:00", "duration": "2h", "price": 1050, "seats_available": 12, "class": "AC Chair Car"},
+  {"id": "TRN004", "train_name": "Deccan Queen", "train_no": "12123", "source": "Mumbai", "destination": "Pune", "departure": "17:10", "arrival": "20:25", "duration": "3h 15m", "price": 485, "seats_available": 27, "class": "AC Chair Car"}
+]

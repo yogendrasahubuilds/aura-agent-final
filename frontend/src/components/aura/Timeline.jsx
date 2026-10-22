@@ -29,7 +29,7 @@ export default function Timeline({ steps = [] }) {
           </div>
           <div className="flex-1 pt-0.5">
             <p className={`text-sm font-medium ${s.status === "done" ? "text-slate-900" : s.status === "in-progress" ? "text-indigo-700" : "text-slate-500"}`}>
-              {s.step}
+              {s.step || s.tool}
             </p>
             <p className="text-[11px] text-slate-400 capitalize mt-0.5">{s.status}</p>
           </div>

@@ -1,13 +1,21 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Users, Star, Plane, ArrowRight, TrendingDown, Flame, Store } from "lucide-react";
+import {
+  MapPin, Users, Star, Plane, Train, Bus, Music, Trophy, ArrowRight,
+  TrendingDown, Flame, Store,
+} from "lucide-react";
 
 const fmt = (n) => new Intl.NumberFormat("en-IN").format(n);
 
 function PriceBadges({ opt }) {
   return (
     <div className="flex flex-wrap gap-1 justify-end">
+      {opt.recommended && (
+        <Badge className="bg-indigo-100 text-indigo-800 border-indigo-300 border text-[10px]">
+          Recommended
+        </Badge>
+      )}
       {opt.is_cheapest && (
         <Badge className="bg-emerald-100 text-emerald-800 border-emerald-300 border text-[10px]">
           <Flame className="w-3 h-3 mr-0.5" />Cheapest
@@ -48,6 +56,9 @@ export default function OptionList({ intent, options, selectedId, onSelect }) {
 
   return (
     <div className="space-y-3" data-testid="option-list">
+      {options[0]?.tradeoff && (
+        <p className="text-xs text-slate-600">{options[0].tradeoff}</p>
+      )}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h3 className="font-heading font-bold text-slate-900">Compared Options ({options.length})</h3>
         {max > min && (
@@ -166,6 +177,87 @@ export default function OptionList({ intent, options, selectedId, onSelect }) {
                 </div>
               </div>
             )}
+
+            {["train", "bus"].includes(intent) && (
+              <div className="flex flex-col sm:flex-row justify-between gap-3">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {intent === "train"
+                      ? <Train className="w-4 h-4 text-blue-600" />
+                      : <Bus className="w-4 h-4 text-blue-600" />}
+                    <h4 className="font-heading font-bold text-slate-900">
+                      {o.train_name || o.operator}
+                    </h4>
+                    <Badge variant="outline" className="text-[10px] font-mono">
+                      {o.train_no || o.bus_no}
+                    </Badge>
+                    <Badge variant="outline" className="text-[10px]">{o.class}</Badge>
+                  </div>
+                  <div className="flex items-center gap-3 mt-3">
+                    <div>
+                      <p className="font-heading font-bold text-lg text-slate-900">{o.departure}</p>
+                      <p className="text-xs text-slate-500">{o.source}</p>
+                    </div>
+                    <div className="flex-1 flex flex-col items-center">
+                      <ArrowRight className="w-5 h-5 text-blue-400" />
+                      <span className="text-[10px] text-slate-400 mt-1">{o.duration}</span>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-heading font-bold text-lg text-slate-900">{o.arrival}</p>
+                      <p className="text-xs text-slate-500">{o.destination}</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2 flex items-center gap-2">
+                    <Users className="w-3 h-3" />{o.seats_available} seats left
+                  </p>
+                </div>
+                <div className="text-right flex sm:flex-col items-end justify-between sm:ml-4 sm:min-w-[120px]">
+                  <div>
+                    <PriceBadges opt={o} />
+                    <p className="font-heading font-extrabold text-xl text-slate-900 mt-1">₹{fmt(o.price)}</p>
+                    <p className="text-[11px] text-slate-500">per passenger</p>
+                  </div>
+                  <Button size="sm" variant={isSelected ? "default" : "outline"} data-testid={`select-${o.id}`}>
+                    {isSelected ? "Selected" : "Select"}
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {["cricket", "concert"].includes(intent) && (
+              <div className="flex flex-col sm:flex-row justify-between gap-3">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {intent === "cricket"
+                      ? <Trophy className="w-4 h-4 text-amber-600" />
+                      : <Music className="w-4 h-4 text-purple-600" />}
+                    <h4 className="font-heading font-bold text-slate-900">{o.match || o.event}</h4>
+                    <Badge variant="outline" className="text-[10px]">{o.class}</Badge>
+                  </div>
+                  <p className="text-xs text-slate-500 flex items-center gap-1 mt-2">
+                    <MapPin className="w-3 h-3" />{o.stadium || o.venue} · {o.city}
+                  </p>
+                  <div className="flex items-center gap-3 mt-3 text-sm">
+                    <span className="font-semibold text-slate-800">{o.date}</span>
+                    <span className="text-slate-500">{o.departure}–{o.arrival}</span>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2 flex items-center gap-2">
+                    <Users className="w-3 h-3" />{o.seats_available} tickets left
+                  </p>
+                </div>
+                <div className="text-right flex sm:flex-col items-end justify-between sm:ml-4 sm:min-w-[120px]">
+                  <div>
+                    <PriceBadges opt={o} />
+                    <p className="font-heading font-extrabold text-xl text-slate-900 mt-1">₹{fmt(o.price)}</p>
+                    <p className="text-[11px] text-slate-500">per ticket</p>
+                  </div>
+                  <Button size="sm" variant={isSelected ? "default" : "outline"} data-testid={`select-${o.id}`}>
+                    {isSelected ? "Selected" : "Select"}
+                  </Button>
+                </div>
+              </div>
+            )}
+            {o.reason && <p className="text-xs text-indigo-700 mt-3">{o.reason}</p>}
           </Card>
         );
       })}

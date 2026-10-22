@@ -5,6 +5,11 @@ import requests
 
 BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://aura-workflow-1.preview.emergentagent.com").rstrip("/")
 API = f"{BASE_URL}/api"
+CHECKOUT_DETAILS = {
+    "passengers": [{"name": "Test Traveler", "age": 30, "gender": "Prefer not to say"}],
+    "contact": {"email": "traveler@example.test", "phone": "9876543210"},
+    "payment_method": "UPI",
+}
 
 
 @pytest.fixture(scope="module")
@@ -47,20 +52,27 @@ def test_search_movie(session):
     assert r.json()["count"] >= 1
 
 
-# ---------- /confirm with 18% GST ----------
-def test_confirm_movie_gst(session):
+# ---------- simulated itemized fare preview ----------
+def test_confirm_movie_itemized_gst(session):
     r = session.post(f"{API}/confirm", json={"intent": "movie", "option_id": "M001", "quantity": 2})
     assert r.status_code == 200
     d = r.json()
     amt = d["amount"]
-    # 18% GST check
-    assert round(amt["tax"], 2) == round(amt["subtotal"] * 0.18, 2)
-    assert round(amt["total"], 2) == round(amt["subtotal"] + amt["tax"], 2)
+    assert amt["gst_rate"] == 18
+    assert amt["fees"] > 0
+    assert amt["breakdown"][-1]["label"] == "GST (18%)"
+    assert round(amt["total"], 2) == round(amt["subtotal"] + amt["fees"] - amt["discount"] + amt["tax"], 2)
 
 
 # ---------- /book require confirmation ----------
 def test_book_requires_confirmation(session):
-    r = session.post(f"{API}/book", json={"intent": "movie", "option_id": "M001", "quantity": 2, "confirmed": False})
+    r = session.post(f"{API}/book", json={
+        "intent": "movie", "option_id": "M001", "quantity": 2, "confirmed": False,
+        **{**CHECKOUT_DETAILS, "passengers": [
+            {"name": "Test Traveler", "age": 30, "gender": "Prefer not to say"},
+            {"name": "Second Traveler", "age": 28, "gender": "Prefer not to say"},
+        ]},
+    })
     assert r.status_code == 400
 
 
@@ -70,6 +82,10 @@ def test_book_movie_with_seats_and_persist(session):
     r = session.post(f"{API}/book", json={
         "intent": "movie", "option_id": "M001", "quantity": 2,
         "confirmed": True, "seats": seats, "user_request": "TEST_seats",
+        **{**CHECKOUT_DETAILS, "passengers": [
+            {"name": "Test Traveler", "age": 30, "gender": "Prefer not to say"},
+            {"name": "Second Traveler", "age": 28, "gender": "Prefer not to say"},
+        ]},
     })
     assert r.status_code == 200
     b = r.json()
@@ -77,6 +93,9 @@ def test_book_movie_with_seats_and_persist(session):
     assert bid.startswith("AURA-MOV-")
     assert b.get("verified") is True
     assert b.get("extra", {}).get("seats") == seats
+    assert b["transaction_id"].startswith("TXN")
+    assert len(b["transaction_id"]) == 13
+    assert b["passengers"][0]["name"] == "Test Traveler"
 
     # GET verifies persistence
     g = session.get(f"{API}/booking/{bid}")
@@ -90,22 +109,30 @@ def test_book_hotel_prefix(session):
     r = session.post(f"{API}/book", json={
         "intent": "hotel", "option_id": "H001", "quantity": 2, "nights": 2,
         "confirmed": True, "user_request": "TEST_hotel",
+        **{**CHECKOUT_DETAILS, "passengers": [
+            {"name": "Test Traveler", "age": 30, "gender": "Prefer not to say"},
+            {"name": "Second Traveler", "age": 28, "gender": "Prefer not to say"},
+        ]},
     })
     assert r.status_code == 200
-    assert r.json()["booking_id"].startswith("AURA-HOT-")
+    assert r.json()["booking_id"].startswith("AURA-HTL-")
 
 
 def test_book_flight_prefix(session):
     r = session.post(f"{API}/book", json={
         "intent": "flight", "option_id": "F001", "quantity": 1,
         "confirmed": True, "user_request": "TEST_flight",
+        **CHECKOUT_DETAILS,
     })
     assert r.status_code == 200
     assert r.json()["booking_id"].startswith("AURA-FLT-")
+    assert r.json()["pnr"]
 
 
 def test_book_bad_option(session):
-    r = session.post(f"{API}/book", json={"intent": "movie", "option_id": "BAD999", "confirmed": True})
+    r = session.post(f"{API}/book", json={
+        "intent": "movie", "option_id": "BAD999", "confirmed": True, **CHECKOUT_DETAILS,
+    })
     assert r.status_code == 404
 
 

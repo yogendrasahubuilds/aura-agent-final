@@ -1,0 +1,6 @@
+[
+  {"id": "HTL001", "hotel": "Fatehabad Road Grand Suites", "city": "Agra", "location": "Fatehabad Road, Agra", "room_type": "Suite", "price_per_night": 18500, "rooms_available": 4, "rating": 4.9, "amenities": ["Breakfast", "Pool", "Spa"], "category": "5-star", "star_rating": 5},
+  {"id": "HTL002", "hotel": "Vainguinim Beach Signature Suites", "city": "Goa", "location": "Vainguinim Beach, Panaji, Goa", "room_type": "Suite", "price_per_night": 12000, "rooms_available": 7, "rating": 4.7, "amenities": ["Beach access", "Pool", "Breakfast"], "category": "5-star", "star_rating": 5},
+  {"id": "HTL003", "hotel": "Sahar Superior Residence", "city": "Mumbai", "location": "Sahar, Andheri East, Mumbai", "room_type": "Superior Room", "price_per_night": 14500, "rooms_available": 5, "rating": 4.8, "amenities": ["Airport transfer", "Pool", "Spa"], "category": "4-star", "star_rating": 4},
+  {"id": "HTL004", "hotel": "Janpath Grand Suites", "city": "Delhi", "location": "Janpath, New Delhi", "room_type": "Suite", "price_per_night": 16000, "rooms_available": 3, "rating": 4.8, "amenities": ["Breakfast", "Pool", "Fine dining"], "category": "5-star", "star_rating": 5}
+]
